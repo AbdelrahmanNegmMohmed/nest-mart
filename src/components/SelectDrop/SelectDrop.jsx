@@ -7,8 +7,6 @@ const SelectDrop = () => {
         setisOpenSelect(!isOpenSelect)
     }
 
-
-
   return (
     <div className="selectdrop cursor position-relative">
         <span className='openselect' onClick={openselect}> All Categories</span>
