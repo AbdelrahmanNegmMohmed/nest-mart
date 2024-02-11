@@ -1,0 +1,41 @@
+.cat_slider_Main .item{height: auto; display: flex; align-items: center;
+    justify-content: center; cursor: pointer; padding: 15px 0px;
+    background:#ecffec;   
+
+    
+
+
+    
+    
+    
+}
+.cat_slider_Main .item .dis{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 15px;
+    position: relative; 
+    border-radius: 10px;
+
+ 
+
+}
+.cat_slider_Main.item.dis h5{
+    font-weight:600
+     !important;
+}
+.dis p{
+    font-size: 14px;
+    opacity: 0.8;
+    color: #000;
+    margin-bottom: 0;
+}
+
+.cat_slider_Main .item:hover .dis img{
+    transform: scale(1.1);
+    transition: all .5s ease-in-out;
+
+
+
+}
