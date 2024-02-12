@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import "./Header.css"
 import logo from "../../Assest/Images/logo (1).svg"
 import SearchIcon from '@mui/icons-material/Search';
@@ -63,13 +63,14 @@ const Header = () => {
     }
 
 
-   
+
 
 
 
 
   return (
   <>
+<div className='headerWrapper'>
   <header>
     <div className="container-fluid">
       <div className='row align-items-center'>
@@ -144,6 +145,7 @@ const Header = () => {
     </div>
   </header>
   <Nav/>
+  </div>
 
   
   </>
