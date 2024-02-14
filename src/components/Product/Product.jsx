@@ -16,7 +16,7 @@ const Product = (props) => {
         }
         <Link>
         <div className='imgWrapper'>
-            <img src="https://nest-frontend-rtl.netlify.app/assets/imgs/shop/product-1-2.jpg" className='w-100' alt="" />
+            <img src="https://nest-frontend-rtl.netlify.app/assets/imgs/shop/product-10-1.jpg" className='w-100' alt="" />
             <div className='overlay transition'>
                <ul className="list list-inline mb-0">
                 <li className="list-inline-item">

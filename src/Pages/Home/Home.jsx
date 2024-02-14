@@ -3,7 +3,7 @@ import HomeSlider from "./slider/Slider"
 import CatSlider from '../../components/CatSlider/CatSlider'
 import Banner from '../../components/banner/Banner'
 import HomeProducts from './HomeProducts/HomeProducts'
-import Product from '../../components/Product/Product'
+import TopPro from './toppro/TopPro'
 
 const Home = () => {
   return (
@@ -12,6 +12,7 @@ const Home = () => {
       <CatSlider/>
       <Banner/>
       <HomeProducts/>
+      <TopPro/>
    </div>
   )
 }

@@ -1,7 +1,12 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css');
 .homeSlider{padding: 30px 0px;}
-.home_slider_Main{border-radius:25px!important; overflow:hidden; position: relative;}
+.home_slider_Main{border-radius:25px!important; overflow:hidden; position: relative;
+    ;width: 100%;}
+.img-hed {
+    width: 100%;
+    border-radius: 25px;
+}
 .slick-arrow{ position: absolute; top: 47%; width: 60px !important; height: 60px !important; 
     border-radius: 50% !important; background: #F2F3F4 !important; z-index: 10 !important;
     transition: all 0.2s ease-in-out; box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);}

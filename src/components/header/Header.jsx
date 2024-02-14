@@ -21,6 +21,7 @@ import Nav from './Nav/Nav';
 
 const Header = () => {
   const[isDropdowen,setisOpenDropDowen]=useState(false)
+  const headerRef=useRef()
 
   const [categories, setcategories] = useState([
     'Milks and Dairies',
@@ -62,7 +63,17 @@ const Header = () => {
       }
     }
 
+    useEffect(()=>{
+      window.addEventListener("scroll", ()=>{
+        let position=window.pageYOffset;
+        if (position>100) {
+          headerRef.current.classList.add("fixed")
+        }else{
+          headerRef.current.classList.remove("fixed")
 
+        }
+      })
+    },[])
 
 
 
@@ -70,7 +81,7 @@ const Header = () => {
 
   return (
   <>
-<div className='headerWrapper'>
+<div className='headerWrapper' ref={headerRef}>
   <header>
     <div className="container-fluid">
       <div className='row align-items-center'>
@@ -146,7 +157,7 @@ const Header = () => {
   </header>
   <Nav/>
   </div>
-
+  <div className="afterHeader"></div>
   
   </>
   )

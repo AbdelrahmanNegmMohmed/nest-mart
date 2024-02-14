@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import "./item.css"
 
 const Item = (props) => {

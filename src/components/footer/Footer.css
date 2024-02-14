@@ -1,0 +1,122 @@
+.footerWrapper{
+    padding: 45px 0px;
+    width: 100%;
+}
+.footerWrapper .footerboxes .box{
+    background: #f4f6fa;
+    padding: 35px 30px;
+    border-radius: 15px;
+}
+.footerWrapper .footerboxes .box .info{
+    padding-left: 25px;
+    
+
+}
+.footerWrapper .footerboxes .box span{
+    transition: all 0.3s ease-in-out;
+}
+.footerWrapper .footerboxes .box .info p{
+    margin-bottom: 0;
+    font-size: 20px;
+    opacity: 0.8;
+}
+.footerWrapper .footerboxes .box .info h4{
+    font-size: 25px;
+    font-weight: 600;
+}
+.footerWrapper .footerboxes .box:hover span{
+    transform: translateY(-20px);
+}
+
+
+
+
+
+footer p, footer a{
+    font-size: 18px;
+    
+}
+footer{
+    padding: 60px 0px;
+    padding-bottom: 0px;
+}
+footer .part1 svg{
+    color: #3bb77e !important;
+}
+footer .part2 h3{
+    color: #000;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+footer .part2 ul li{
+    list-style: none;
+    margin-bottom: 13px;
+
+}
+footer .part2 ul li a{
+    color: #000;
+    opacity: 0.8;
+    font-weight: 500;
+    font-size: 25px;
+    transition: all 0.3s ease-in-out;
+    text-decoration: none;
+}
+footer .part2 ul li a:hover{
+    text-decoration: none;
+    color: #3bb77e;
+    opacity: 1;
+    padding-left: 5px;
+}
+.footer-list{
+    padding-left: 0px;
+}
+
+
+
+footer .ststrip{
+    padding: 25px 0px;
+
+}
+
+.phNoon span svg{ font-size: 45px !important; opacity: 0.8;}
+.phNoon h3{ font-size:32px !important; line-height: 35px !important;}
+.phNoon p{ font-size: 16px !important; opacity: 0.8; padding-left: 4px;}
+
+
+
+
+.part3 ul h5{
+    margin-bottom: 0;
+
+}
+
+.part3 ul{
+    margin-bottom: 0;
+    padding-left: 25px;
+
+}
+.part3 ul li a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: #3bb77e;
+    border-radius: 50%;
+    transition: all 0.3s ease-in-out;
+
+}
+.part3 ul li a svg{
+    color: #fff;
+}
+.part3 ul li a:hover{
+    background: red;
+}
+.apdis a:hover{
+    transform: translateY(-10px);
+
+}
+.apdis a{
+    transition: all 0.3s ease-in-out;
+
+}

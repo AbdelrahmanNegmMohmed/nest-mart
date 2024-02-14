@@ -1,0 +1,39 @@
+.newslettersection{
+    width: 100%;
+    height: auto;
+    padding-bottom: 50px;
+}
+.newslettersection .box{
+    background: url("../../../Assest/Images/banner/bg.png");
+    width: 100%;
+    height: auto;
+    padding: 80px 80px 0px 80px;
+    border-radius: 50px;
+}
+.newslettersection .box .info{
+    width: 60%;
+}
+.newslettersection .box .info h2{
+    font-size: 80px;
+    font-family: "Quicksand", sans-serif;
+    color: #253D4E;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+.newslettersection .box .info p{
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 24px;
+    margin-bottom: 5px;
+    color: #7E7E7E;
+    margin-bottom: 45px;
+}
+.newslettersection .box .info p span{
+    color: #3bb77e;
+}
+
+
+.newslettersection .box .img{
+    width: 40%;
+}

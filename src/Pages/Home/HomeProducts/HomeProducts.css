@@ -1,5 +1,4 @@
 .homeProducts{ 
-    margin-bottom: 200px; 
     padding: 25px 0px;
 }
 .filterTab li{
@@ -34,10 +33,34 @@
 }
 
 
+.pre-5{
+    width:20% ;
+    height: 20%;
+
+
+}
+.pre-5 img{
+    border-radius: 15px;
+    width: 100% !important;
+    height: 100%;
+}
+.conte{
+    width: 80%;
+}
 
 
 
 
+
+
+
+
+
+
+
+.topProductsection{
+    padding: 35px 0px;
+}
 
 
 

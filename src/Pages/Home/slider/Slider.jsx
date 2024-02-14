@@ -3,8 +3,7 @@ import "./Slider.css"
 import Slider from "react-slick";
 import slid1 from "../../../Assest/Images/slider-1.png"
 import slid2 from "../../../Assest/Images/slider-2.png"
-import Button from '@mui/material/Button'
-import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
+import NewsLatter from '../../../components/NewsLatter/NewsLatter';
 
 
 
@@ -25,7 +24,7 @@ const HomeSlider = () => {
         <div className='container-fluid position-relative'>
             <Slider {...settings} className='home_slider_Main'>
                 <div className='item'>
-                    <img src={slid1} className='w-100' />
+                    <img src={slid1} className='img-hed'/>
                     <div className="info">
                         <h2 className='mb-5'>
                         Don’t miss amazing<br/>
@@ -37,7 +36,7 @@ const HomeSlider = () => {
                     
                 </div>
                 <div className='item '>
-                    <img src={slid2} className='w-100' />
+                    <img src={slid2} className='img-hed' />
                     <div className="info info2eddition">
                         <h2 className='mb-5'>
                         Fresh Vegetables<br/>
@@ -49,11 +48,12 @@ const HomeSlider = () => {
 
                 </div>           
                 </Slider>
-                <div className="newsLetterBanner">
+             {/*    <div className="newsLetterBanner">
                 <input type="text" placeholder='Your email address' />
                 <Button className='bg-g'>Subscribe</Button>
                 <SendOutlinedIcon/>
-                </div>
+                </div> */}
+                <NewsLatter/>
 
         </div>
     </section>
