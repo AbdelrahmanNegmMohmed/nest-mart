@@ -1,0 +1,8 @@
+.notFound{width: 100%; height: auto; padding: 45px 0px;}
+.notFound .box{width: 50%; height: auto; padding: 100px 30px; text-align: center; margin: auto;}
+
+.notFound .box h1{font-size: 60px; font-weight: bold; color: #000; opacity: 0.7;}
+.notFound .box p{color: #000; font-size: 20px; margin-top: 25px;}
+.btn-g{background: #3bb77e !important; padding: 10px 25px !important; border-radius: 5px !important; color: #fff !important; text-transform: capitalize !important; font-size: 18px !important;}
+.btn-lg{font-size: 24px !important; padding: 10px 25px !important;}
+.pr a{text-decoration: none !important; color: #fff;}

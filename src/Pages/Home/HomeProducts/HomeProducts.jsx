@@ -202,9 +202,9 @@ const HomeProducts = () => {
     </div>
 
 </div>
+<br />
+<br />
 
-<br />
-<br />
  </>
   )
 

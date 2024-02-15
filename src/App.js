@@ -3,7 +3,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/header/Header';
 import { BrowserRouter,Route,Routes } from 'react-router-dom';
 import Home from './Pages/Home/Home';
-import About from './Pages/About/About';
+import Listing from './Pages/listing/Listing';
+import Footer from './components/footer/Footer';
+import TopPro from './Pages/Home/toppro/TopPro';
+import NotFound from './Pages/NoutFound/NotFound';
 
 
 
@@ -13,8 +16,10 @@ function App() {
     <Header/>
     <Routes>
       <Route exact={true} path='/' element={<Home/>}/>
-      <Route exact={true} path='/liststing' element={<About/>}/>
+      <Route exact={true} path='/listing' element={<Listing/>}/>
+      <Route exact={true} path='*' element={<NotFound/>}/>
     </Routes>
+    <TopPro/>
  </BrowserRouter>
   );
 }
