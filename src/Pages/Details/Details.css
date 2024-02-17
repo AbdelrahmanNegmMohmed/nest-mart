@@ -1,0 +1,343 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css');
+.breadcrumbwrapper{
+    width: 100%;
+    height: auto;
+    padding: 30px 0px;
+    border-bottom:1px solid rgba(0,0,0,0.1) !important;
+}
+.breadcrumb2{
+    padding: 0px !important;
+    background: none !important;
+}
+/* .breadcrumb2 li{
+    margin-right: 25px !important;
+    font-size: 22px !important;
+
+}
+.breadcrumb2 li a{
+    color: #000 !important;
+    text-decoration: none;
+    padding: 0px 25px 0 0;
+    display: block;
+    position: relative;
+} */
+ul.breadcrumb {
+    padding: 10px 16px;
+    list-style: none;
+   }
+  ul.breadcrumb li {
+    display: inline;
+    font-size: 18px;
+  }
+  ul.breadcrumb li+li:before{
+    padding: 8px;
+    color: black;
+    content: "/\00a0";
+  }
+  ul.breadcrumb li a{
+    color: #3bb77e;
+    text-decoration: none !important;
+  }
+  ul.breadcrumb li a:hover {
+    color: #3bb77e;
+    text-decoration: underline;
+  }
+  .text-g{color: #3bb77e;}
+.text-org{color: #fdc040 !important;
+}
+.p{
+    color: #7e7e7e7e;
+}
+.detailsPage .productinfo .pricesection .pricelarge{
+    font-size: 60px;
+    font-weight: bold;
+}
+.detailsPage .productinfo .pricesection .text-org{
+    font-size: 25px ;
+    font-weight: 600;
+}
+.text-light {
+    font-size: 25px ;
+    font-weight: 600;
+    color: #7e7e7e7e !important;
+
+
+}
+.oldprice{
+    font-size: 35px ;
+    font-weight: 600;
+    color: #7e7e7e7e !important;
+}
+.pr{
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+    gap: 0;
+    justify-content: flex-start;
+
+}
+.pricesection{
+    display: flex;
+    align-items: center;
+
+}
+.detailsPage .productinfo h1{
+    font-size: 55px;
+    font-weight: bold;
+    opacity: 0.8;
+}
+.productinfo-rate{
+    display: flex;
+    align-items: center;
+}
+.productzoom{
+    width: 100%;
+    height:auto;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+.zoomslider{
+    padding-top: 30px;
+}
+.zoomslider *{
+    outline: none;
+}
+.zoomslider .slick-slide{
+padding-right: 20px !important;
+}
+.zoomslider .item{
+    border: 2px solid transparent !important;
+    overflow: hidden;
+    border-radius: 15px;
+    cursor: pointer;
+
+
+}
+.productinfo{
+    padding-left: 80px;
+}
+.zoomslider .slick-current .item{
+    border: 2px solid #3bb77e !important;
+
+
+}
+.zoomslider .slick-arrow{
+    top: 55% !important;
+    zoom:80% ;
+}
+.zoomslider .slick-next{
+    right: -4% !important;
+}
+.zoomslider .slick-prev{
+    left: -6% !important;
+}
+
+
+.cont{
+    padding: 30px 0px;
+    max-width: 85% !important;
+}
+.productsize{
+    width: 100%;
+    height: auto;
+    padding: 25px 0px;
+}
+.productsize ul li{
+    margin-right: 15px;
+
+}
+.productsize ul li a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding:10px 20px !important;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    color: #000;
+    font-size: 16px;
+    transition: all 0.1s ease-in-out;
+}
+.productsize ul li a.active{
+    background-color:#3bb77e;
+    color: #fff; 
+}
+.addcartsection{
+    width: 100%;
+    height: auto;
+}
+.addcartsection .countersec{
+    width: 120px;
+    height: 60px;
+    border-radius: 10px;
+    border: 1px solid #3bb77e;
+    overflow: hidden;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+}
+.addcartsection .countersec input{
+    width: 60px;
+    height: 40px;
+    padding: 5px;
+    border: none;
+    outline: none;
+    text-align: center;
+}
+.addcartsection .countersec .arrow{
+    position: absolute;
+    cursor: pointer;
+    opacity: 0.6;
+}
+.addcartsection .countersec .arrow.plus{
+    top: -8px;
+    right: 9px;
+
+}
+.addcartsection .countersec .arrow.minus{
+    bottom: 21px;
+    right: 10px;
+
+}
+.addcartsection{
+    display: flex;
+    gap: 15px;
+}
+.addtocartbtn svg{
+    font-size:25px !important;
+
+}
+.addcartsection button{
+    height: 60px;
+    min-width: inherit !important;
+    transition: all 0.3s ease-in-out;
+}
+.addcartsection button svg{
+    font-size: 30px !important;
+}
+.btn-border{
+    border: 1px solid rgba(0,0,0,0.1) !important;
+    color: #000 !important;
+}
+.btn-border:hover{
+    border: 1px solid #3bb77e!important;
+    background: #3bb77e !important;
+    color: #fff;
+}
+.btn-border svg{
+    opacity: 0.5;
+}
+
+.addcartsection button:hover{
+    transform: translateY(-20px);
+}
+.zoomslider .item img{
+    background-color: transparent;
+}
+
+
+
+
+
+
+
+
+
+/* detailspagetaps */
+.detailspagetap{
+    border-radius: 25px;
+}
+.customtaps ul li{
+    margin-right: 30px !important;
+}
+.customtaps ul li button{
+    padding: 10px 25px !important;
+    border: 1px solid rgba(0,0,0,0.2) !important;
+    font-size: 20px !important;
+    text-transform: capitalize !important;
+    border-radius: 30px;
+    color: #000;
+    
+
+}
+.customtaps ul li button.active{
+    color: #3bb77e;
+
+}
+
+.card{
+    border-radius: 10px;
+}
+
+
+
+.reviewscard .rounded-circle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    width: 100px;
+    height:100px ;
+
+}
+.reviewscard .image{
+    width: 100px;
+}
+.reviewscard .rounded-circle img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+}
+.reviewscard .info{
+    padding-left: 25px;
+   
+}
+.reviewscard .datedes{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.reviewscard{
+    margin-bottom: 25px;
+}
+.reviewform .form-group{
+    margin-bottom: 25px !important;
+}
+.reviewform .form-group .form-control{
+    height: 80px;
+    font-size: 20px;
+    border-radius: 7px !important;
+    padding-left: 20px;
+}
+.reviewform .form-group textarea{
+    height: 200px !important;
+    padding-top: 25px;
+
+}
+.btn-lg{
+    font-size: 24px;
+    padding: 10px 25px !important;
+}
+.par{
+    padding-left: 50px;
+}
+.spa{
+    margin-right: 5px;
+}
+
+
+.progressbox{
+    margin-bottom: 35px;
+}
+.progress-bar{
+
+}
+.hd{
+    padding-bottom: 20px;
+}

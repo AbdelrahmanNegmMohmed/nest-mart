@@ -7,7 +7,7 @@ import Listing from './Pages/listing/Listing';
 import Footer from './components/footer/Footer';
 import TopPro from './Pages/Home/toppro/TopPro';
 import NotFound from './Pages/NoutFound/NotFound';
-
+import Details from './Pages/Details/Details';
 
 
 function App() {
@@ -17,6 +17,7 @@ function App() {
     <Routes>
       <Route exact={true} path='/' element={<Home/>}/>
       <Route exact={true} path='/listing' element={<Listing/>}/>
+      <Route exact={true} path='/product/details' element={<Details/>}/>
       <Route exact={true} path='*' element={<NotFound/>}/>
     </Routes>
     <TopPro/>
