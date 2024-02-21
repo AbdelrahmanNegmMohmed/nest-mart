@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Nav.css"
 import Button from '@mui/material/Button'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -11,7 +11,11 @@ import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
 
 
 
-const Nav = () => {
+const Nav = (props) => {
+  const [navData,setnavData]=useState([])
+  useEffect(()=>{
+    setnavData(props.data)
+  },[])
   return (
     <div className='nav d-flex align-items-center'>
       <div className="container-fluid ">
@@ -26,8 +30,8 @@ const Nav = () => {
             <nav>
               <ul className='list list-inline mb-0'>
                 <li className='list-inline-item'>
-                  <Button><Link>Home <KeyboardArrowDownIcon/></Link></Button>
-                  <div className="dropdown_menu">
+                  <Button><Link to={'/'}>Home <KeyboardArrowDownIcon/></Link></Button>
+             {/*      <div className="dropdown_menu">
                     <ul>
                       <li><Button><Link to="/about">Home1</Link></Button></li>
                       <li><Button><Link to="/about">Home2</Link></Button></li>
@@ -37,12 +41,51 @@ const Nav = () => {
                       <li><Button><Link to="/about">Home6</Link></Button></li>
          
                     </ul>
-                  </div>
+                  </div> */}
                 </li>
-                <li className='list-inline-item'>
-                  <Button><Link>About</Link></Button>
-                </li>
-                <li className='list-inline-item'>
+
+                {
+                  navData.length !== 0 &&
+                  navData.map((item,index)=>{
+                    return(
+                      <li className='list-inline-item'key={index}>
+                       <Button><Link to={`/cat/${item.cat_name.toLowerCase()}`}>{item.cat_name}</Link></Button>
+                       {
+                        item.items.length !== 0 &&
+                        <div className='dropdown_menu'>
+                          <ul>
+                            {
+                              item.items.map((item2,index2)=>{
+                                return(
+                                  <li key={index}>
+                                    <Button>
+                                      <Link to={`/cat/${item.cat_name.toLowerCase()}
+                                      /${item2.cat_name.replace().toLowerCase()}`}>
+                                        {
+                                          item2.cat_name
+                                        }
+                                      </Link>
+                                    </Button>
+
+                                  </li>
+                                )
+
+                              })
+                            }
+                          </ul>
+
+                        </div>
+                      
+                       }
+                 
+                    </li>
+                    )
+
+                    
+                  })
+                }
+               
+              {/*   <li className='list-inline-item'>
                   <Button><Link>Shop <KeyboardArrowDownIcon/></Link></Button>
                   <div className="dropdown_menu">
                     <ul>
@@ -61,7 +104,7 @@ const Nav = () => {
          
                     </ul>
                   </div>
-                </li>
+                </li> */}
                 <li className='list-inline-item'>
                   <Button><Link>Vendors <KeyboardArrowDownIcon/></Link></Button>
                   <div className="dropdown_menu">

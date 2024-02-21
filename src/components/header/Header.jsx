@@ -19,7 +19,7 @@ import { ClickAwayListener } from '@mui/base/ClickAwayListener';
 import Nav from './Nav/Nav';
 
 
-const Header = () => {
+const Header = (props) => {
   const[isDropdowen,setisOpenDropDowen]=useState(false)
   const headerRef=useRef()
 
@@ -155,7 +155,7 @@ const Header = () => {
       </div>
     </div>
   </header>
-  <Nav/>
+  <Nav data={props.data}/>
   </div>
   <div className="afterHeader"></div>
   

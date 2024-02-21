@@ -21,6 +21,7 @@ function App() {
     try {
       await axios.get(url).then((response) => {
         console.log(response.data);
+        setproductData(response.data);
       });
     } catch (error) {
       console.log(error.massage);
@@ -30,10 +31,10 @@ function App() {
   return (
     productData.length !== 0 && (
       <BrowserRouter>
-        <Header />
+        <Header data={productData}/>
         <Routes>
           <Route exact={true} path="/" element={<Home />} />
-          <Route exact={true} path="/listing" element={<Listing />} />
+          <Route exact={true} path="/cat/:id" element={<Listing data={productData} />} />
           <Route exact={true} path="/product/details" element={<Details />} />
           <Route exact={true} path="*" element={<NotFound />} />
         </Routes>

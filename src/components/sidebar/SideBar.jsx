@@ -13,6 +13,7 @@ import bannar2 from "../../Assest/Images/banner/banner1.jpg"
 
 
 
+
 function valuetext(value) {
     return `${value}°C`;
   }
@@ -28,6 +29,7 @@ const SideBar = () => {
   return (
     <>
     <div className='sidebar'>
+     
         <div className='card border-0 shadow'>
                 <h3>Category</h3>
                 <div className='catlist'>
