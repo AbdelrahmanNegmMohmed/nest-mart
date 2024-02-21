@@ -1,27 +1,45 @@
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Header from './components/header/Header';
-import { BrowserRouter,Route,Routes } from 'react-router-dom';
-import Home from './Pages/Home/Home';
-import Listing from './Pages/listing/Listing';
-import Footer from './components/footer/Footer';
-import TopPro from './Pages/Home/toppro/TopPro';
-import NotFound from './Pages/NoutFound/NotFound';
-import Details from './Pages/Details/Details';
-
+import { useEffect, useState } from "react";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Header from "./components/header/Header";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./Pages/Home/Home";
+import Listing from "./Pages/listing/Listing";
+import Footer from "./components/footer/Footer";
+import TopPro from "./Pages/Home/toppro/TopPro";
+import NotFound from "./Pages/NoutFound/NotFound";
+import Details from "./Pages/Details/Details";
+import axios from "axios";
 
 function App() {
+  const [productData, setproductData] = useState([]);
+  useEffect(() => {
+    getData("http://localhost:5000/productData");
+  }, []);
+
+  const getData = async (url) => {
+    try {
+      await axios.get(url).then((response) => {
+        console.log(response.data);
+      });
+    } catch (error) {
+      console.log(error.massage);
+    }
+  };
+
   return (
- <BrowserRouter>
-    <Header/>
-    <Routes>
-      <Route exact={true} path='/' element={<Home/>}/>
-      <Route exact={true} path='/listing' element={<Listing/>}/>
-      <Route exact={true} path='/product/details' element={<Details/>}/>
-      <Route exact={true} path='*' element={<NotFound/>}/>
-    </Routes>
-    <TopPro/>
- </BrowserRouter>
+    productData.length !== 0 && (
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route exact={true} path="/" element={<Home />} />
+          <Route exact={true} path="/listing" element={<Listing />} />
+          <Route exact={true} path="/product/details" element={<Details />} />
+          <Route exact={true} path="*" element={<NotFound />} />
+        </Routes>
+        <TopPro />
+      </BrowserRouter>
+    )
   );
 }
 
