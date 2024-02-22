@@ -34,7 +34,7 @@ function App() {
         <Header data={productData}/>
         <Routes>
           <Route exact={true} path="/" element={<Home />} />
-          <Route exact={true} path="/cat/:id" element={<Listing data={productData} />} />
+          <Route exact={true} path="/cat/:id" element={<Listing data={productData}/>} />
           <Route exact={true} path="/product/details" element={<Details />} />
           <Route exact={true} path="*" element={<NotFound />} />
         </Routes>
