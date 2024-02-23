@@ -6,7 +6,6 @@ import Slider from "react-slick";
 import TopProducts from "../topproducts/TopProducts";
 
 const HomeProducts = (props) => {
-  const [activeTabIndex, setactiveTabIndex] = useState(0);
 
   var settings = {
     dots: false,
@@ -21,79 +20,7 @@ const HomeProducts = (props) => {
   };
   return (
     <>
-      <section className="homeProducts">
-        <div className="container-fluid">
-          <div className="d-flex align-items-center content">
-            <h2 className="hd mb-0 mt-0">Popular Products</h2>
-            <ul className="list list-inline ml-auto mb-0  filterTab">
-              {props.data.length !== 0 &&
-                props.data.map((cat, index) => {
-                  return (
-                    <li className="list-inline-item">
-                      <a
-                        className={`cursor text-capitalize                              
-                                 ${activeTabIndex === index ? "act" : ""}`}
-                        onClick={() => {
-                          setactiveTabIndex(index);
-                        }}
-                      >
-                        {cat}
-                      </a>
-                    </li>
-                  );
-                })}
-            </ul>
-          </div>
-
-          <div className="productRow">
-            <div className="item">
-              <Product col={"sale"} />
-            </div>
-            <div className="item">
-              <Product col={"hot"} />
-            </div>
-            <div className="item">
-              <Product col={"new"} />
-            </div>
-            <div className="item">
-              <Product col={"best"} />
-            </div>
-            <div className="item">
-              <Product col={"new"} />
-            </div>
-            <div className="item">
-              <Product col={"hot"} />
-            </div>
-            <div className="item">
-              <Product col={"new"} />
-            </div>
-            <div className="item">
-              <Product col={"sale"} />
-            </div>
-            <div className="item">
-              <Product col={"new"} />
-            </div>
-            <div className="item">
-              <Product col={"best"} />
-            </div>
-            <div className="item">
-              <Product />
-            </div>
-            <div className="item">
-              <Product />
-            </div>
-            <div className="item">
-              <Product />
-            </div>
-            <div className="item">
-              <Product />
-            </div>
-            <div className="item">
-              <Product />
-            </div>
-          </div>
-        </div>
-      </section>
+   
 
       <section className="homeProducts pt-0 homeproductrow2">
         <div className="container-fluid ">
