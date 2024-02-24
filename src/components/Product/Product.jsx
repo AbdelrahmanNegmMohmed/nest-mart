@@ -1,65 +1,81 @@
-import React from 'react'
-import "./Product.css"
-import Rating from '@mui/material/Rating';
-import { Button} from '@mui/material';
-import { Link } from 'react-router-dom';
-import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
-import CompareArrowsOutlinedIcon from '@mui/icons-material/CompareArrowsOutlined';
-import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
+import React, { useEffect, useState } from "react";
+import "./Product.css";
+import Rating from "@mui/material/Rating";
+import { Button } from "@mui/material";
+import { Link } from "react-router-dom";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import CompareArrowsOutlinedIcon from "@mui/icons-material/CompareArrowsOutlined";
+import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 const Product = (props) => {
+  const [productData, setproductData] = useState();
+  useEffect(() => {
+    setproductData(props.item);                    
+  }, [props.item]);                          
   return (
-    <div className='productThumb'>
-        {
-            props.col!==null &&props.col!==undefined &&<span className={`badge ${props.col}`}>{props.col}</span>
-
-        }
-        <Link>
-        <div className='imgWrapper'>
-            <img src="https://nest-frontend-rtl.netlify.app/assets/imgs/shop/product-10-1.jpg" className='w-100' alt="" />
-            <div className='overlay transition'>
-               <ul className="list list-inline mb-0">
-                <li className="list-inline-item">
-                    <a className='cursor '  tooltip="Add to Wishlist">
-                        <FavoriteBorderOutlinedIcon/>
+    <div className="productThumb">
+      {props.col !== null && props.col !== undefined && (
+        <span className={`badge ${props.col}`}>{props.col}</span>
+      )}
+      {productData !== undefined && (
+        <>
+          <Link>
+            <div className="imgWrapper">
+              <div className="p-4">
+                <img src={productData.catImg+'?im=Resize=(420,420)'} className="w-100" alt="" />
+              </div>
+              <div className="overlay transition">
+                <ul className="list list-inline mb-0">
+                  <li className="list-inline-item">
+                    <a className="cursor " tooltip="Add to Wishlist">
+                      <FavoriteBorderOutlinedIcon />
                     </a>
-                </li>
-                <li className="list-inline-item">
-                    <a className='cursor' tooltip="Compare">
-                        <CompareArrowsOutlinedIcon/>
+                  </li>
+                  <li className="list-inline-item">
+                    <a className="cursor" tooltip="Compare">
+                      <CompareArrowsOutlinedIcon />
                     </a>
-                </li>
-                <li className="list-inline-item">
-                    <a className='cursor' tooltip="Quick View">
-                        <RemoveRedEyeOutlinedIcon/>
+                  </li>
+                  <li className="list-inline-item">
+                    <a className="cursor" tooltip="Quick View">
+                      <RemoveRedEyeOutlinedIcon />
                     </a>
-                </li>
-
-               </ul>
-
+                  </li>
+                </ul>
+              </div>
             </div>
-        </div>        
-        </Link>
-        <div className='info'>
-            <span className='d-block catname'>snack</span>
-            <h4 className='title'><Link>Seeds of Change Organic Quinoa, Brown, & Red Rice</Link></h4>
-            <Rating name="half-rating-read" defaultValue={2.5} precision={0.5} readOnly />
-            <span className='brand d-block text-g'> By<a className='text-g'>NestFood</a></span>
+          </Link>
+          <div className="info">
+            <span className="d-block catname">{productData.brand}</span>
+            <h4 className="title">
+              <Link>{productData.productName}</Link>
+            </h4>
+            <Rating
+              name="half-rating-read"
+              defaultValue={parseFloat(productData.rating)}
+              precision={0.5}
+              readOnly
+            />
+            <span className="brand d-block text-g">
+              {" "}
+              By<a className="text-g">{productData.brand}</a>
+            </span>
 
-
-            <div className='d-flex align-items-center justify mt-3 '>
-                <div className='d-flex aligin-items-center'>
-                    <span className='pricre text-g font-weight-bold'>$28.85</span>
-                    <span className='old_pricre'>$32.8</span>
-                </div>
-                     <Button className=' ml-auto transition'><ShoppingCartOutlinedIcon/>Add</Button>
+            <div className="d-flex align-items-center justify mt-3 ">
+              <div className="d-flex aligin-items-center">
+                <span className="pricre text-g font-weight-bold">EGP {productData.price}</span>
+                <span className="old_pricre">EGP {productData.oldPrice}</span>
+              </div>
+              <Button className=" ml-auto transition">
+                <ShoppingCartOutlinedIcon />
+                Add
+              </Button>
             </div>
-
-        </div>
+          </div>
+        </>
+      )}
     </div>
-
-  )
-}
+  );
+};
 
 export default Product;
-

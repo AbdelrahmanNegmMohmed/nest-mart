@@ -20,7 +20,6 @@ function App() {
   const getData = async (url) => {
     try {
       await axios.get(url).then((response) => {
-        console.log(response.data);
         setproductData(response.data);
       });
     } catch (error) {
