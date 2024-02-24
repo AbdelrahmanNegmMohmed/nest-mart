@@ -4,14 +4,27 @@ import CatSlider from "../../components/CatSlider/CatSlider";
 import Banner from "../../components/banner/Banner";
 import Product from "../../components/Product/Product";
 import "../../Assest/css/home.css";
-import HomeProducts from "./HomeProducts/HomeProducts";
+import Slider from "react-slick";
+import banner from "../../Assest/Images/banner/banner-4.png";
 
 const Home = (props) => {
+  var settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    fade: false,
+    arrows: true,
+    autoplay: 3000,
+    centerMode: true,
+  };
   const [prodData, setprodData] = useState(props.data); //al data
   const [catArray, setcatArray] = useState([]); // data after map 2 and filter
   const [activeTabIndex, setactiveTabIndex] = useState(0); //بتغير لون الحاجه اللي دايس عليها
   const [activeTab, setactiveTab] = useState([]);
   const [activeTabData, setactiveTabData] = useState([]);
+  const [BestSalls,setBestSalls] =useState([])
 
   useEffect(() => {
     prodData.length !== 0 &&
@@ -39,6 +52,25 @@ const Home = (props) => {
         });
       });
   }, [activeTab, setactiveTab]);
+
+
+  const bsetsallsArr =[]
+  useEffect(()=>{
+    prodData.length!==0 &&
+      prodData.map((item,index)=>{
+        if(item.cat_name=== "Fashion"){
+          item.items.length !== 0 &&
+            item.items.map((item2)=>{
+              item2.products.length !== 0 &&
+                item2.products.map((product,index)=>{
+                  bsetsallsArr.push(product)
+                })
+            })
+
+        }
+        setBestSalls(bsetsallsArr)
+      })
+  },[])
   return (
     <div>
       <HomeSlider />
@@ -82,7 +114,46 @@ const Home = (props) => {
           </div>
         </div>
       </section>
-      <HomeProducts />
+      <section className="homeProducts pt-0 homeproductrow2">
+        <div className="container-fluid ">
+          <div className="d-flex align-items-center content homeproductrow2">
+            <h2 className="hd mb-0 mt-0">Daily Best Sells</h2>
+            <ul className="list list-inline ml-auto mb-0  filterTab">
+              <li className="list-inline-item">
+                <a className="cursor">Featured</a>
+              </li>
+              <li className="list-inline-item">
+                <a className="cursor">Popular</a>
+              </li>
+              <li className="list-inline-item">
+                <a className="cursor">New added</a>
+              </li>
+            </ul>
+          </div>
+          <br />
+          <div className="row">
+            <div className="col-md-3 pre-5">
+              <img src={banner} alt="" />
+            </div>
+            <div className="col-md-9 conte">
+              <Slider {...settings} className="prodSlider">
+                {
+                  BestSalls.length !== 0 &&
+                     BestSalls.map((item,index)=>{
+                      return(
+                        <div className="item d-flex">
+                             <Product col={"sale"} item={item} />
+                        </div>
+                      )
+                     
+                     }) 
+                }
+             
+              </Slider>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
