@@ -6,6 +6,7 @@ import Product from "../../components/Product/Product";
 import "../../Assest/css/home.css";
 import Slider from "react-slick";
 import banner from "../../Assest/Images/banner/banner-4.png";
+import HomeProducts from "./HomeProducts/HomeProducts";
 
 const Home = (props) => {
   var settings = {
@@ -74,7 +75,7 @@ const Home = (props) => {
   return (
     <div>
       <HomeSlider />
-      <CatSlider />
+      <CatSlider data={prodData}/>
       <Banner />
       <section className="homeProducts">
         <div className="container-fluid">
@@ -119,15 +120,14 @@ const Home = (props) => {
           <div className="d-flex align-items-center content homeproductrow2">
             <h2 className="hd mb-0 mt-0">Daily Best Sells</h2>
             <ul className="list list-inline ml-auto mb-0  filterTab">
-              <li className="list-inline-item">
-                <a className="cursor">Featured</a>
-              </li>
-              <li className="list-inline-item">
-                <a className="cursor">Popular</a>
-              </li>
+             
+             
               <li className="list-inline-item">
                 <a className="cursor">New added</a>
               </li>
+              {
+
+              }
             </ul>
           </div>
           <br />
@@ -141,7 +141,7 @@ const Home = (props) => {
                   BestSalls.length !== 0 &&
                      BestSalls.map((item,index)=>{
                       return(
-                        <div className="item d-flex">
+                        <div className="item d-flex" key={index}>
                              <Product col={"sale"} item={item} />
                         </div>
                       )
@@ -154,6 +154,7 @@ const Home = (props) => {
           </div>
         </div>
       </section>
+      <HomeProducts/>
     </div>
   );
 };

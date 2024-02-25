@@ -48,11 +48,6 @@ const HomeSlider = () => {
 
                 </div>           
                 </Slider>
-             {/*    <div className="newsLetterBanner">
-                <input type="text" placeholder='Your email address' />
-                <Button className='bg-g'>Subscribe</Button>
-                <SendOutlinedIcon/>
-                </div> */}
                 <NewsLatter/>
 
         </div>

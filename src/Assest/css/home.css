@@ -59,3 +59,10 @@
 .cursor {
   cursor: pointer;
 }
+.slick-arrow.slick-prev{
+  top: 45%;
+} 
+.slick-arrow.slick-next{
+  top: 45%;
+
+}

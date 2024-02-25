@@ -21,7 +21,7 @@ const Product = (props) => {
         <>
           <Link>
             <div className="imgWrapper">
-              <div className="p-4">
+              <div className="p-4 wrapper">
                 <img src={productData.catImg+'?im=Resize=(420,420)'} className="w-100" alt="" />
               </div>
               <div className="overlay transition">
@@ -48,7 +48,7 @@ const Product = (props) => {
           <div className="info">
             <span className="d-block catname">{productData.brand}</span>
             <h4 className="title">
-              <Link>{productData.productName}</Link>
+              <Link>{productData.productName.substring(0,70) + '...' }</Link>
             </h4>
             <Rating
               name="half-rating-read"

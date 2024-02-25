@@ -59,6 +59,10 @@
     width: 100%;
     overflow: hidden;
 }
+.productThumb .imgWrapper .wrapper{
+  height: 510px;
+  overflow: hidden;
+}
 .productThumb .imgWrapper img{
     transition: all 0.3s ease-in-out; 
 
@@ -111,6 +115,7 @@
     opacity: 0; 
     transform: scale(0.8); 
  }
+
 .productThumb:hover .imgWrapper .overlay{
     opacity: 1; transform: scale(1); 
 }
@@ -293,30 +298,6 @@
   [tooltip][flow^="right"]:hover::after {
     animation: tooltips-horz 300ms ease-out forwards;
   }
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .bg-g .bg-success{
     background: #3bb77e !important;
 }

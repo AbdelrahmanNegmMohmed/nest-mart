@@ -22,62 +22,6 @@ const HomeProducts = (props) => {
     <>
    
 
-      <section className="homeProducts pt-0 homeproductrow2">
-        <div className="container-fluid ">
-          <div className="d-flex align-items-center content homeproductrow2">
-            <h2 className="hd mb-0 mt-0">Daily Best Sells</h2>
-            <ul className="list list-inline ml-auto mb-0  filterTab">
-              <li className="list-inline-item">
-                <a className="cursor">Featured</a>
-              </li>
-              <li className="list-inline-item">
-                <a className="cursor">Popular</a>
-              </li>
-              <li className="list-inline-item">
-                <a className="cursor">New added</a>
-              </li>
-            </ul>
-          </div>
-          <br />
-          <div className="row">
-            <div className="col-md-3 pre-5">
-              <img src={banner} alt="" />
-            </div>
-            <div className="col-md-9 conte">
-              <Slider {...settings} className="prodSlider">
-                <div className="item d-flex">
-                  <Product col={"sale"} />
-                </div>
-                <div className="item d-flex">
-                  <Product col={"sale"} />
-                </div>
-                <div className="item d-flex">
-                  <Product col={"sale"} />
-                </div>
-                <div className="item d-flex">
-                  <Product col={"sale"} />
-                </div>
-                <div className="item d-flex">
-                  <Product col={"sale"} />
-                </div>
-                <div className="item d-flex">
-                  <Product col={"sale"} />
-                </div>
-                <div className="item d-flex">
-                  <Product col={"sale"} />
-                </div>
-                <div className="item d-flex">
-                  <Product col={"sale"} />
-                </div>
-                <div className="item d-flex">
-                  <Product col={"sale"} />
-                </div>
-              </Slider>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <div className="topProductsection">
         <div className="container-fluid">
           <div className="row">
