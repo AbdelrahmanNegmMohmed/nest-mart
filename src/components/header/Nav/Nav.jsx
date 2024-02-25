@@ -39,7 +39,7 @@ const Nav = (props) => {
                   navData.map((item, index) => {
                     return (
                       <li className="list-inline-item">
-                        <Button>
+                        <Button onClick={()=>{sessionStorage.setItem('cat',item.cat_name.toLowerCase())}}>
                           <a href={`/cat/${item.cat_name.toLowerCase()}`}>
                             {item.cat_name} <KeyboardArrowDownIcon />
                           </a>
@@ -51,7 +51,7 @@ const Nav = (props) => {
                               {item.items.map((item2, index2) => {
                                 return (
                                   <li>
-                                    <Button>
+                                    <Button  onClick={()=>{sessionStorage.setItem('cat',item.cat_name.toLowerCase())}}>
                                       <a
                                         href={`/cat/${item.cat_name.toLowerCase()}
                                     /${item2.cat_name.replace(/\s/g, '-').toLowerCase()}`}

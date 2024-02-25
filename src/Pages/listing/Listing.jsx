@@ -22,26 +22,21 @@ const Listing = (props) => {
   useEffect(() => {
     props.data.length !== 0 &&
       props.data.map((item) => {
-        console.log(item,"item");
-        if (props.single=== true) {
+        if (props.single === true) {
           if (item.cat_name.toLowerCase() === id.toLowerCase()) {
-            item.items.length !== 0 &&
+              item.items.length!== 0 &&
               item.items.map((item2) => {
-                console.log(item2,"item2");
-                item2.Products.length !== 0 &&
+                item2.products.length !== 0 &&
                   item2.products.map((product) => {
-                    console.log(product);
                     itemsdata.push(product);
                   });
               });
           }
-        } 
-        else {
+        } else {
           item.items.length !== 0 &&
             item.items.map((item3) => {
-              console.log(item3,item);
               if (
-                item3.cat_name.split(' ').join("-").toLowerCase() ===
+                item3.cat_name.split(" ").join("-").toLowerCase() === 
                 id.toLocaleLowerCase()
               ) {
                 item3.products.length !== 0 &&
@@ -56,35 +51,48 @@ const Listing = (props) => {
       (item, index) => itemsdata.indexOf(item) === index
     );
     setdata(list2);
-  }, []);
+  },[id]);
 
   return (
     <div className="lisitingPage">
       <div className="container-fluid">
         <div className="breadcrumb flex-column">
-          <h1>Snack</h1>
+          <h1 className="text-capitalize">{sessionStorage.getItem('cat')}</h1>
           <ul className="list list-inline d-flex mb-0">
             <li className="list-inline-item">
-              <Link to={""}>Home</Link>
+              <Link to={'/'}>Home</Link>
             </li>
+          
+             
             <li className="list-inline-item">
-              <Link to={""}>Shop</Link>
+              <Link className="text-capitalize" to={`/cat/${sessionStorage.getItem('cat')}`}>{sessionStorage.getItem('cat')}</Link>
             </li>
-            <li className="list-inline-item">
+
+          
+            {
+              props.single === false &&
+              <li className="list-inline-item">
+              <Link className="text-capitalize">{id}</Link>
+            </li>
+            }
+          {/*   <li className="list-inline-item">
               <Link to={""}>Snack</Link>
-            </li>
+            </li> */}
           </ul>
         </div>
         <div className="listingDate">
           <div className="row">
             <div className="col-md-3 sidebarWapper">
-              <SideBar />
+              {
+                data.length !== 0 &&
+              <SideBar data={props.data} currenrtData={data} />
+              }
             </div>
             <div className="col-md-9 rightContent homeProducts pt-0">
               <div className="topStrip d-flex align-items-center">
                 <p className="mb-0">
-                  We found <span className="text-success">29</span> items for
-                  you!
+                  We found <span className="text-success">{data.length}</span>{" "}
+                  items for you!
                 </p>
                 <div className="ml-auto d-flex align-items-center contenbuttom">
                   <div className="tab_ position-relative">
@@ -200,11 +208,10 @@ const Listing = (props) => {
                   data.map((item, index) => {
                     return (
                       <div className="item" key={index}>
-                        <Product col={"best"} item={item}/>
+                        <Product col={"best"} item={item} />
                       </div>
                     );
                   })}
-       
               </div>
             </div>
           </div>

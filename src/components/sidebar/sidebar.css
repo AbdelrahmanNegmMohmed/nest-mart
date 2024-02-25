@@ -15,8 +15,12 @@
     justify-content: space-between;
 
 }
+.sidebarWapper .sidebar .card .catlist a{
+    text-decoration: none;
+}
+
 .sidebarWapper .sidebar .card .catlist .catItem h4{
-    color: #000;
+    color: #000 !important;
     font-size: 20px;
 }
 .sidebarWapper .sidebar .card .catlist .catItem .rounded-circle{
