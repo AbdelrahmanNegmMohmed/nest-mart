@@ -5,8 +5,8 @@ import cat2 from "../../Assest/Images/categort/category-2.svg";
 import cat3 from "../../Assest/Images/categort/category-3.svg";
 import cat4 from "../../Assest/Images/categort/category-4.svg";
 import cat5 from "../../Assest/Images/categort/category-5.svg";
-import Slider from "@mui/material/Slider";
-import Checkbox from "@mui/material/Checkbox";
+import RangeSlider from 'react-range-slider-input';
+import 'react-range-slider-input/dist/style.css';import Checkbox from "@mui/material/Checkbox";
 import { Button } from "@mui/material";
 import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
 import bannar2 from "../../Assest/Images/banner/banner1.jpg";
@@ -19,33 +19,50 @@ function valuetext(value) {
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 const SideBar = (props) => {
-  const [value, setValue] = React.useState([20, 37]);
+  const [value, setValue] = React.useState([20, 6000]);
+  const [value2 ,setvalue2]=useState(0)
   const [totalLingth,settotalLingth]=useState([])
 
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
 
 
-
-  var catlength =0;
-  var lengthArr=[];
+var catLength = 0;
+var lengthArr = []
 useEffect(()=>{
-props.data.length !==0 &&
-props.data.map((item,index)=>{
-  item.items.length !== 0 &&
-    item.items.map((item2,index2)=>{
-      catlength+=item2.products.length
-
+  props.data.length !== 0 &&
+    props.data.map((item,index)=>{
+      item.items.length !== 0 &&
+        item.items.map((item2)=>{
+          catLength += item2.products.length
+        })
+        lengthArr.push(catLength)
+        catLength=0
     })
-    lengthArr.push(catlength)
-    catlength=0
-})
-
-const list = lengthArr.filter((item,index)=>lengthArr.indexOf(item)===index)
-settotalLingth(list)
+    const list = lengthArr.filter((item,index)=>lengthArr.indexOf(item) === index)
+    settotalLingth(list)
 },[])
+
+
+
+
+useEffect(()=>{
+  var price = 0;
+  props.currenrtData.length !== 0 &&
+    props.currenrtData.map((item,index)=>{
+      let prodPrice = parseInt(item.price.toLowerCase().replace(/,/g,""))
+        if(prodPrice>price){
+          price = prodPrice
+        }
+    })
+    setvalue2(price)
+},[props.currenrtData])
+
+
+useEffect(()=>{
+  props.filterByPrice(value[0],value[1])
+
+},[value])
+
   return (
     <>
       <div className="sidebar">
@@ -54,7 +71,7 @@ settotalLingth(list)
           <div className="catlist">
             {props.data.length !== 0 &&
               props.data.map((item,index) => {
-                return (
+                return ( 
                   <a className="nest"  href={`/cat/${item.cat_name.toLowerCase()}`}>
                     <div className="catItem ">
                       <span className="img">
@@ -75,23 +92,13 @@ settotalLingth(list)
 
         <div className="card border-0 shadow">
           <h3>Full by Price</h3>
-          <Slider
-            main={0}
-            step={1}
-            max={1000}
-            getAriaLabel={() => "Temperature range"}
-            value={value}
-            onChange={handleChange}
-            valueLabelDisplay="auto"
-            getAriaValueText={valuetext}
-            color="success"
-          />
+          <RangeSlider value={value} onInput={setValue} min={10} max={6000} step={5} />
           <div className=" d-flex pt-2 pb-2 priceRange">
             <span>
-              From:<strong className="text-success">${value[0]}</strong>
+              From:<strong className="text-success">EGP: {value[0]} </strong>
             </span>
             <span>
-              To:<strong className="text-success">${value[1]}</strong>
+              To:<strong className="text-success">EGP: {value[1]} </strong>
             </span>
           </div>
 

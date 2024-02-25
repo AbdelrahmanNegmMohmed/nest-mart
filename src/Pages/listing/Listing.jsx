@@ -53,6 +53,36 @@ const Listing = (props) => {
     setdata(list2);
   },[id]);
 
+  const filterByPrice = (minValue,maxValue)=>{
+    props.data.length !== 0 &&
+      props.data.map((item,index)=>{
+        if(props.single === true){
+          if(id === item.cat_name.toLowerCase()){
+            item.items.length !== 0 &&
+              item.items.map((item2)=>{
+                item2.products.length !== 0 &&
+                  item2.products.map((product,prodIndex)=>{
+                    let price =parseInt(product.price.toString().replace(/,/g,''))
+                    if(minValue <= price && maxValue>= price){
+                      itemsdata.push({...product ,
+                         parentCatName: item.cat_name,
+                         subCatName:item2.cat_name
+                          })
+
+                    }
+                  })
+
+              })
+              
+
+          }
+
+        }
+      })
+      const list2 = itemsdata.filter((item,index)=>itemsdata.indexOf(item)=== index)
+      setdata(list2)
+  }
+
   return (
     <div className="lisitingPage">
       <div className="container-fluid">
@@ -83,10 +113,10 @@ const Listing = (props) => {
         <div className="listingDate">
           <div className="row">
             <div className="col-md-3 sidebarWapper">
-              {
-                data.length !== 0 &&
-              <SideBar data={props.data} currenrtData={data} />
-              }
+              
+               
+              <SideBar data={props.data} currenrtData={data} filterByPrice={filterByPrice} />
+              
             </div>
             <div className="col-md-9 rightContent homeProducts pt-0">
               <div className="topStrip d-flex align-items-center">
