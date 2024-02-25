@@ -1,9 +1,9 @@
 import "./Listing.css";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import SideBar from "../../components/sidebar/SideBar";
 import Product from "../../components/Product/Product";
 import { Button } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import GridViewIcon from "@mui/icons-material/GridView";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -12,9 +12,52 @@ import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import TuneIcon from '@mui/icons-material/Tune';
 import PinDropIcon from '@mui/icons-material/PinDrop'; */
-const Listing = () => {
+const Listing = (props) => {
   const [isopendropdown, setisopendropdown] = useState(false);
   const [isopendropdown2, setisopendropdown2] = useState(false);
+  const [data, setdata] = useState([]);
+
+  const { id } = useParams();
+  var itemsdata = [];
+  useEffect(() => {
+    props.data.length !== 0 &&
+      props.data.map((item) => {
+        console.log(item,"item");
+        if (props.single=== true) {
+          if (item.cat_name.toLowerCase() === id.toLowerCase()) {
+            item.items.length !== 0 &&
+              item.items.map((item2) => {
+                console.log(item2,"item2");
+                item2.Products.length !== 0 &&
+                  item2.products.map((product) => {
+                    console.log(product);
+                    itemsdata.push(product);
+                  });
+              });
+          }
+        } 
+        else {
+          item.items.length !== 0 &&
+            item.items.map((item3) => {
+              console.log(item3,item);
+              if (
+                item3.cat_name.split(' ').join("-").toLowerCase() ===
+                id.toLocaleLowerCase()
+              ) {
+                item3.products.length !== 0 &&
+                  item3.products.map((product) => {
+                    itemsdata.push(product);
+                  });
+              }
+            });
+        }
+      });
+    const list2 = itemsdata.filter(
+      (item, index) => itemsdata.indexOf(item) === index
+    );
+    setdata(list2);
+  }, []);
+
   return (
     <div className="lisitingPage">
       <div className="container-fluid">
@@ -153,66 +196,15 @@ const Listing = () => {
               </div>
 
               <div className="productRow pl-4 pr-3">
-                <div className="item ">
-                  <Product col={"best"} />
-                </div>
-                <div className="item ">
-                  <Product col={"sale"} />
-                </div>
-                <div className="item ">
-                  <Product col={"hot"} />
-                </div>
-                <div className="item ">
-                  <Product col={"new"} />
-                </div>
-                <div className="item ">
-                  <Product col={"best"} />
-                </div>
-                <div className="item ">
-                  <Product col={"new"} />
-                </div>
-                <div className="item ">
-                  <Product col={"best"} />
-                </div>
-                <div className="item ">
-                  <Product col={"new"} />
-                </div>
-                <div className="item ">
-                  <Product col={"best"} />
-                </div>
-                <div className="item ">
-                  <Product col={"new"} />
-                </div>
-                <div className="item ">
-                  <Product col={"best"} />
-                </div>
-                <div className="item ">
-                  <Product col={"best"} />
-                </div>
-                <div className="item ">
-                  <Product col={"sale"} />
-                </div>
-                <div className="item ">
-                  <Product col={"hot"} />
-                </div>
-                <div className="item ">
-                  <Product col={"new"} />
-                </div>
-                <div className="item ">
-                  <Product col={"best"} />
-                </div>
-                <div className="item ">
-                  <Product col={"sale"} />
-                </div>
-                <div className="item ">
-                  <Product col={"hot"} />
-                </div>
-                <div className="item ">
-                  <Product col={"new"} />
-                </div>
-                <div className="item ">
-                  <Product col={"new"} />
-                </div>
+                {data.length !== 0 &&
+                  data.map((item, index) => {
+                    return (
+                      <div className="item" key={index}>
+                        <Product col={"best"} item={item}/>
+                      </div>
+                    );
+                  })}
+       
               </div>
             </div>
           </div>

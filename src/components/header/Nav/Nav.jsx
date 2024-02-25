@@ -40,9 +40,9 @@ const Nav = (props) => {
                     return (
                       <li className="list-inline-item">
                         <Button>
-                          <Link to={`/cat/${item.cat_name.toLowerCase()}`}>
+                          <a href={`/cat/${item.cat_name.toLowerCase()}`}>
                             {item.cat_name} <KeyboardArrowDownIcon />
-                          </Link>
+                          </a>
                         </Button>
 
                         {item.items.length !== 0 && (
@@ -52,12 +52,12 @@ const Nav = (props) => {
                                 return (
                                   <li>
                                     <Button>
-                                      <Link
-                                        to={`/cat/${item.cat_name.toLowerCase()}
-                                    /${item2.cat_name.replace().toLowerCase()}`}
+                                      <a
+                                        href={`/cat/${item.cat_name.toLowerCase()}
+                                    /${item2.cat_name.replace(/\s/g, '-').toLowerCase()}`}
                                       >
                                         {item2.cat_name}
-                                      </Link>
+                                      </a>
                                     </Button>
                                   </li>
                                 );
