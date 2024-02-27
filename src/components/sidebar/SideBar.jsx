@@ -91,8 +91,8 @@ useEffect(()=>{
         </div>
 
         <div className="card border-0 shadow">
-          <h3>Full by Price</h3>
-          <RangeSlider value={value} onInput={setValue} min={10} max={6000} step={5} />
+          <h3>Filter by Price</h3>
+          <RangeSlider value={value} onInput={setValue} min={20} max={60000} step={5} />
           <div className=" d-flex pt-2 pb-2 priceRange">
             <span>
               From:<strong className="text-success">EGP: {value[0]} </strong>
@@ -103,7 +103,7 @@ useEffect(()=>{
           </div>
 
           <div className="filters mt-4">
-            <h5>Color</h5>
+            <h5>filter by product name</h5>
             <ul className="mb-0">
               <li>
                 {" "}
