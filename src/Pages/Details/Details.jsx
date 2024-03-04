@@ -201,7 +201,76 @@ const Details = (props) => {
            } 
             
           })
+            }
+            {
+          currentproduct.length !==0 &&
+          currentproduct.map((item)=>{
+           if(item.RAM !== undefined && item.RAM.length !== 0 ){
+            return(
+            <div className="productsize d-flex align-items-center">
+              <span>RAM :</span>
+              <ul className="lit list-inline mb-0 pl-4">
+                {
+                  item.RAM.map((RAM,index)=>{
+                    return(
+                <li className="list-inline-item">
+                  <a
+                    className={` tag ${activesie === index ? "active" : ""}`}
+                    onClick={() => isActive(index)}
+                  >
+                    {RAM} GB
+                  </a>
+                </li> 
 
+                    )
+
+                  })
+
+                }
+
+              </ul>
+            </div>
+
+            )
+
+           } 
+            
+          })
+            }
+            {
+          currentproduct.length !==0 &&
+          currentproduct.map((item)=>{
+           if(item.SIZE !== undefined && item.SIZE.length !== 0 ){
+            return(
+            <div className="productsize d-flex align-items-center">
+              <span>SIZE :</span>
+              <ul className="lit list-inline mb-0 pl-4">
+                {
+                  item.SIZE.map((SIZE,index)=>{
+                    return(
+                <li className="list-inline-item">
+                  <a
+                    className={` tag ${activesie === index ? "active" : ""}`}
+                    onClick={() => isActive(index)}
+                  >
+                    {SIZE} 
+                  </a>
+                </li> 
+
+                    )
+
+                  })
+
+                }
+
+              </ul>
+            </div>
+
+            )
+
+           } 
+            
+          })
             }
 
             <div className="addcartsection pt-4 pb-4 d-flex align-items-center">
