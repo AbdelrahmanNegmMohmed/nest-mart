@@ -1,10 +1,10 @@
 import React from "react";
 import "./sidebar.css";
-import cat1 from "../../Assest/Images/categort/category-1.svg";
+/* import cat1 from "../../Assest/Images/categort/category-1.svg";
 import cat2 from "../../Assest/Images/categort/category-2.svg";
 import cat3 from "../../Assest/Images/categort/category-3.svg";
 import cat4 from "../../Assest/Images/categort/category-4.svg";
-import cat5 from "../../Assest/Images/categort/category-5.svg";
+import cat5 from "../../Assest/Images/categort/category-5.svg"; */
 import RangeSlider from 'react-range-slider-input';
 import 'react-range-slider-input/dist/style.css';import Checkbox from "@mui/material/Checkbox";
 import { Button } from "@mui/material";
@@ -19,7 +19,7 @@ function valuetext(value) {
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 const SideBar = (props) => {
-  const [value, setValue] = React.useState([20, 6000]);
+  const [value, setValue] = React.useState([100, 60000]);
   const [value2 ,setvalue2]=useState(0)
   const [totalLingth,settotalLingth]=useState([])
 
@@ -92,7 +92,7 @@ useEffect(()=>{
 
         <div className="card border-0 shadow">
           <h3>Filter by Price</h3>
-          <RangeSlider value={value} onInput={setValue} min={20} max={60000} step={5} />
+          <RangeSlider value={value} onInput={setValue} min={100} max={60000} step={5} />
           <div className=" d-flex pt-2 pb-2 priceRange">
             <span>
               From:<strong className="text-success">EGP: {value[0]} </strong>

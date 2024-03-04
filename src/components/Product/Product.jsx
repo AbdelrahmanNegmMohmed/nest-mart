@@ -10,6 +10,7 @@ import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 const Product = (props) => {
   const [productData, setproductData] = useState();
   useEffect(() => {
+    window.scrollTo(0,0);
     setproductData(props.item);                    
   }, [props.item]);                          
   return (
@@ -19,7 +20,7 @@ const Product = (props) => {
       )}
       {productData !== undefined && (
         <>
-          <Link>
+          <Link to={`/product/${productData.id}`}>
             <div className="imgWrapper">
               <div className="p-4 wrapper">
                 <img src={productData.catImg+'?im=Resize=(420,420)'} className="w-100" alt="" />
