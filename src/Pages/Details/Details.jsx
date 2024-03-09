@@ -479,8 +479,12 @@ const Details = (props) => {
                 </div>
               </div>
             )}
-                    <h3>Customer questions & answers</h3>
-                    { 
+         
+                        <h3>
+                   
+                      Customer questions & answers 
+                    </h3>
+             {/*        { 
                       currentproduct.length !== 0 &&
                       currentproduct.map((review)=>{
                         review.reviews.length !== 0 &&
@@ -525,7 +529,7 @@ const Details = (props) => {
 
                       })
 
-                    }
+                    } */}
             {activetaps === 2 && (
               <div className="tapcontant">
                 <div className="row">
@@ -538,14 +542,15 @@ const Details = (props) => {
                       <br />
 
                       <div className="form-group">
-                        <textarea
-                          placeholder="Write a Review"
-                          name=""
-                          id=""
-                          cols="30"
-                          rows="10"
-                          className="form-control "
-                        ></textarea>
+                   
+                              <textarea
+                                placeholder= "Write a Review" 
+                                name=""
+                                id=""
+                                cols="30"
+                                rows="10"
+                                className="form-control "
+                              ></textarea>
                       </div>
                       <div className="row">
                         <div className="col-md-6">
