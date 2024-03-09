@@ -484,13 +484,7 @@ const Details = (props) => {
                    
                       Customer questions & answers 
                     </h3>
-             {/*        { 
-                      currentproduct.length !== 0 &&
-                      currentproduct.map((review)=>{
-                        review.reviews.length !== 0 &&
-                        review.reviews.map((review2,index)=>{
-                          return(
-                            <div className="card p-4 reviewscard flex-row" key={index}>
+                {/*     <div className="card p-4 reviewscard flex-row" >
                               <div className="image"> 
                                 <div className="rounded-circle">
                                   <img src="https://nest-frontend-rtl.netlify.app/assets/imgs/blog/author-2.png" />
@@ -513,23 +507,92 @@ const Details = (props) => {
                                     />
                                 </div>
                                
-                                    <p>{review2.review}</p>
+                                    <p>helllo</p>
                                
                               </div>
-                            </div>                      
-                            )
-                            
-                            
-
-                            
-                           
-                          
-
-                          }) 
-
-                      })
-
-                    } */}
+                    </div>
+                    <div className="card p-4 reviewscard flex-row" >
+                              <div className="image"> 
+                                <div className="rounded-circle">
+                                  <img src="https://nest-frontend-rtl.netlify.app/assets/imgs/blog/author-2.png" />
+                                </div>
+                                <span className="text-g d-block text-center font-weight-bold">
+                                  Sienna
+                                </span>
+                              </div>
+        
+                              <div className="info pl-5">
+                                <div className="datedes">
+                                  <h5 className="text-light">
+                                    December 4, 2022 at 3:12 pm
+                                  </h5>
+                                  <Rating
+                                    name="half-rating-read"
+                                    defaultValue={2.5}
+                                    precision={0.5}
+                                    readOnly
+                                    />
+                                </div>
+                               
+                                    <p>helllo</p>
+                               
+                              </div>
+                    </div>
+                    <div className="card p-4 reviewscard flex-row" >
+                              <div className="image"> 
+                                <div className="rounded-circle">
+                                  <img src="https://nest-frontend-rtl.netlify.app/assets/imgs/blog/author-2.png" />
+                                </div>
+                                <span className="text-g d-block text-center font-weight-bold">
+                                  Sienna
+                                </span>
+                              </div>
+        
+                              <div className="info pl-5">
+                                <div className="datedes">
+                                  <h5 className="text-light">
+                                    December 4, 2022 at 3:12 pm
+                                  </h5>
+                                  <Rating
+                                    name="half-rating-read"
+                                    defaultValue={2.5}
+                                    precision={0.5}
+                                    readOnly
+                                    />
+                                </div>
+                               
+                                    <p>helllo</p>
+                               
+                              </div>
+                    </div>
+                    <div className="card p-4 reviewscard flex-row" >
+                              <div className="image"> 
+                                <div className="rounded-circle">
+                                  <img src="https://nest-frontend-rtl.netlify.app/assets/imgs/blog/author-2.png" />
+                                </div>
+                                <span className="text-g d-block text-center font-weight-bold">
+                                  Sienna
+                                </span>
+                              </div>
+        
+                              <div className="info pl-5">
+                                <div className="datedes">
+                                  <h5 className="text-light">
+                                    December 4, 2022 at 3:12 pm
+                                  </h5>
+                                  <Rating
+                                    name="half-rating-read"
+                                    defaultValue={2.5}
+                                    precision={0.5}
+                                    readOnly
+                                    />
+                                </div>
+                               
+                                    <p>helllo</p>
+                               
+                              </div>
+                    </div>
+ */}
             {activetaps === 2 && (
               <div className="tapcontant">
                 <div className="row">
@@ -591,7 +654,6 @@ const Details = (props) => {
                   </div>
                   <div className="col-md-4 par">
                     <h4>Customer reviews</h4>
-                    <br />
                     <div className="d-flex align-items-center mt-2">
                       <Rating
                         name="half-rating-read"

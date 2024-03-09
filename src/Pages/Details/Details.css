@@ -285,7 +285,9 @@ padding-right: 20px !important;
     border-radius: 10px;
 }
 
-
+.reviewscard {
+    width: 66%;
+}
 
 .reviewscard .rounded-circle{
     display: flex;
@@ -307,7 +309,6 @@ padding-right: 20px !important;
 }
 .reviewscard .info{
     padding-left: 25px;
-    background-color: #3bb77e;
    
 }
 .reviewscard .datedes{
@@ -338,6 +339,12 @@ padding-right: 20px !important;
 }
 .par{
     padding-left: 50px;
+    position: absolute;
+    right: 0;
+    bottom: 22%;
+}
+.par h4{
+    margin-bottom: 20px;
 }
 .spa{
     margin-right: 5px;
