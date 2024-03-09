@@ -20,8 +20,8 @@ const Home = (props) => {
     autoplay: 3000,
     centerMode: true,
   };
-  const [prodData, setprodData] = useState(props.data); //al data
-  const [catArray, setcatArray] = useState([]); // data after map 2 and filter
+  const [prodData,setprodData] = useState(props.data); //al data
+  const [catArray,setcatArray] = useState([]); // data after map 2 and filter
   const [activeTabIndex, setactiveTabIndex] = useState(0); //بتغير لون الحاجه اللي دايس عليها
   const [activeTab, setactiveTab] = useState([]);
   const [activeTabData, setactiveTabData] = useState([]);
@@ -48,11 +48,21 @@ const Home = (props) => {
       prodData.map((item, index) => {
         item.items.map((item2, index2) => {
           if (item2.cat_name === activeTab) {
-            setactiveTabData(item2.products);
+            {
+              item2.products.length !== 0 &&
+                item2.products.map((product)=>{
+                  arr.push({
+                    ...product,
+                    parentCatName: item.cat_name,
+                    subCatName: item2.cat_name
+                  })
+                })
+                setactiveTabData(arr);
+            }
           }
-        });
-      });
-  }, [activeTab, setactiveTab]);
+        })
+      })
+  },[activeTab, setactiveTabData]);
 
 
   const bsetsallsArr =[]
@@ -107,7 +117,7 @@ const Home = (props) => {
               activeTabData.map((item, index) => {
                 return (
                   <div className="item" key={index}>
-                    <Product col={"sale"} item={item} />
+                    <Product col={"sale"} item={item}/>
                   </div>
                 );
               })}

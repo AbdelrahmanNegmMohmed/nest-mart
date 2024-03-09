@@ -307,6 +307,7 @@ padding-right: 20px !important;
 }
 .reviewscard .info{
     padding-left: 25px;
+    background-color: #3bb77e;
    
 }
 .reviewscard .datedes{
@@ -351,4 +352,9 @@ padding-right: 20px !important;
 }
 .hd{
     padding-bottom: 20px;
+}
+.relatedproducts .prodSlider .slick-track{
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
 }

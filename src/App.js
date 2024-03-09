@@ -16,6 +16,7 @@ function App() {
   useEffect(() => {
     getData("http://localhost:5000/productData");
   }, []);
+ 
 
   const getData = async (url) => {
     try {
@@ -26,6 +27,7 @@ function App() {
       console.log(error.massage);
     }
   };
+
 
   return (
     productData.length !== 0 && (

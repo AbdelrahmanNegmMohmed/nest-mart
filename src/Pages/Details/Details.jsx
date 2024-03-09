@@ -25,6 +25,11 @@ const Details = (props) => {
     setzoomImage(url);
   };
 
+  const [prodCat, setprodCat] = useState({
+    parentCat: sessionStorage.getItem("parentCat"),
+    subCatName: sessionStorage.getItem("subCatName"),
+  });
+  const [relatedproducts, setrelatedproducts] = useState([]);
   let { id } = useParams();
 
   const [activesie, setactivesie] = useState(0);
@@ -57,7 +62,29 @@ const Details = (props) => {
         const list = arr.filter((item, index) => arr.indexOf(item) === index);
         setcurrentproduct(list);
       });
-  }, []);
+
+    //related products code
+    const related_products = [];
+    props.data.length !== 0 &&
+      props.data.map((item) => {
+        if (prodCat.parentCat === item.cat_name) {
+          item.items.length !== 0 &&
+            item.items.map((item2) => {
+              if (prodCat.subCatName === item2.cat_name) {
+                item2.products.length !== 0 &&
+                  item2.products.map((product, index) => {
+                    if (product.id !== parseInt(id)) {
+                      related_products.push(product);
+                    }
+                  });
+              }
+            });
+        }
+      });
+    if (related_products.length !== 0) {
+      setrelatedproducts(related_products);
+    }
+  }, [id]);
 
   const [activetaps, setactivetaps] = useState(0);
 
@@ -77,7 +104,6 @@ const Details = (props) => {
     slidesToShow: 4,
     slidesToScroll: 1,
     fade: false,
-    arrows: true,
   };
   return (
     <section className="detailsPage mb-5">
@@ -88,11 +114,41 @@ const Details = (props) => {
               <Link>Home</Link>
             </li>
             <li>
-              <Link>Vegetables & Tubers</Link>
+              <Link
+                to={`/cat/${prodCat.parentCat
+                  .split(" ")
+                  .join("-")
+                  .toLowerCase()}`}
+                onClick={() => {
+                  sessionStorage.setItem(
+                    "cat",
+                    prodCat.parentCat.split(" ").join("-").toLowerCase()
+                  );
+                }}
+                className="text-capitalize"
+              >
+                {prodCat.parentCat}
+              </Link>
             </li>
+
             <li>
-              <Link>Seeds Of Change Organic</Link>
+              <Link
+                to={`/cat/${prodCat.parentCat.toLowerCase()}
+                    /${prodCat.subCatName.replace(/\s/g, "-").toLowerCase()}`}
+                onClick={() => {
+                  sessionStorage.setItem(
+                    "cat",
+                    prodCat.subCatName.toLowerCase()
+                  );
+                }}
+                className="text-capitalize"
+              >
+                {prodCat.subCatName}
+              </Link>
             </li>
+            {currentproduct.map((item) => {
+              return <li>{item.productName}</li>;
+            })}
           </ul>
         </div>
       </div>
@@ -111,194 +167,161 @@ const Details = (props) => {
                       src={item.catImg}
                     />
                   );
-                })} 
+                })}
             </div>
             <Slider {...settings} className="zoomslider">
               {currentproduct.length !== 0 &&
-                currentproduct.map((item,index) => {
+                currentproduct.map((item, index) => {
                   item.productImages.length !== 0 &&
-                    item.productImages.map((img)=>{
+                    item.productImages.map((img) => {
                       return (
                         <div className="item" key={index}>
                           <img
                             src={img}
                             className="w-100"
                             onClick={() => goto(index)}
-                          /> 
+                          />
                         </div>
                       );
-
-                    })
-
-                    
+                    });
                 })}
             </Slider>
           </div>
           {/* productinfo code end here */}
 
           {/* productzoom code start here */}
-          {
-            currentproduct.length !== 0 && 
-            currentproduct.map((item)=>{
-              return(
-          <div className="col-md-7 productinfo pl-5">
-            <h1>
-              {item.productName
-}
-              </h1>
-            <div className=" productinfo-rate  mb-4">
-              <Rating
-                name="half-rating-read"
-                defaultValue={parseFloat(item.rating)}
-                precision={0.5}
-                readOnly
-              />
-              <span className="text-light">(32 reviews)</span>
-            </div>
-            <div className="pricesection d-flex align-items-center mb-3">
-              <span className="text-g pricelarge">EGP {item.price}</span>
-              <div className="ml-2 pr">
-                <span className="text-org">{item.discount}% off</span>
-                <span className="text-light oldprice">EGP {item.oldPrice}</span>
-              </div>
-            </div>
-            <p className="text-light">
-           {item.description}
-            </p>
-            <br />
-            <br />
-            {
-          currentproduct.length !==0 &&
-          currentproduct.map((item)=>{
-           if(item.weight !== undefined && item.weight.length !== 0 ){
-            return(
-            <div className="productsize d-flex align-items-center">
-              <span>Size / Weight :</span>
-              <ul className="lit list-inline mb-0 pl-4">
-                {
-                  item.weight.map((item_,index)=>{
-                    return(
-                <li className="list-inline-item">
-                  <a
-                    className={` tag ${activesie === index ? "active" : ""}`}
-                    onClick={() => isActive(index)}
-                  >
-                    {item_} g
-                  </a>
-                </li> 
+          {currentproduct.length !== 0 &&
+            currentproduct.map((item) => {
+              return (
+                <div className="col-md-7 productinfo pl-5">
+                  <h1>{item.productName}</h1>
+                  <div className=" productinfo-rate  mb-4">
+                    <Rating
+                      name="half-rating-read"
+                      defaultValue={parseFloat(item.rating)}
+                      precision={0.5}
+                      readOnly
+                    />
+                    <span className="text-light">(32 reviews)</span>
+                  </div>
+                  <div className="pricesection d-flex align-items-center mb-3">
+                    <span className="text-g pricelarge">EGP {item.price}</span>
+                    <div className="ml-2 pr">
+                      <span className="text-org">{item.discount}% off</span>
+                      <span className="text-light oldprice">
+                        EGP {item.oldPrice}
+                      </span>
+                    </div>
+                  </div>
+                  <p className="text-light">{item.description}</p>
+                  <br />
+                  <br />
+                  {currentproduct.length !== 0 &&
+                    currentproduct.map((item) => {
+                      if (
+                        item.weight !== undefined &&
+                        item.weight.length !== 0
+                      ) {
+                        return (
+                          <div className="productsize d-flex align-items-center">
+                            <span>Size / Weight :</span>
+                            <ul className="lit list-inline mb-0 pl-4">
+                              {item.weight.map((item_, index) => {
+                                return (
+                                  <li className="list-inline-item">
+                                    <a
+                                      className={` tag ${
+                                        activesie === index ? "active" : ""
+                                      }`}
+                                      onClick={() => isActive(index)}
+                                    >
+                                      {item_} g
+                                    </a>
+                                  </li>
+                                );
+                              })}
+                            </ul>
+                          </div>
+                        );
+                      }
+                    })}
+                  {currentproduct.length !== 0 &&
+                    currentproduct.map((item) => {
+                      if (item.RAM !== undefined && item.RAM.length !== 0) {
+                        return (
+                          <div className="productsize d-flex align-items-center">
+                            <span>RAM :</span>
+                            <ul className="lit list-inline mb-0 pl-4">
+                              {item.RAM.map((RAM, index) => {
+                                return (
+                                  <li className="list-inline-item">
+                                    <a
+                                      className={` tag ${
+                                        activesie === index ? "active" : ""
+                                      }`}
+                                      onClick={() => isActive(index)}
+                                    >
+                                      {RAM} GB
+                                    </a>
+                                  </li>
+                                );
+                              })}
+                            </ul>
+                          </div>
+                        );
+                      }
+                    })}
+                  {currentproduct.length !== 0 &&
+                    currentproduct.map((item) => {
+                      if (item.SIZE !== undefined && item.SIZE.length !== 0) {
+                        return (
+                          <div className="productsize d-flex align-items-center">
+                            <span>SIZE :</span>
+                            <ul className="lit list-inline mb-0 pl-4">
+                              {item.SIZE.map((SIZE, index) => {
+                                return (
+                                  <li className="list-inline-item">
+                                    <a
+                                      className={` tag ${
+                                        activesie === index ? "active" : ""
+                                      }`}
+                                      onClick={() => isActive(index)}
+                                    >
+                                      {SIZE}
+                                    </a>
+                                  </li>
+                                );
+                              })}
+                            </ul>
+                          </div>
+                        );
+                      }
+                    })}
 
-                    )
-
-                  })
-
-                }
-
-              </ul>
-            </div>
-
-            )
-
-           } 
-            
-          })
-            }
-            {
-          currentproduct.length !==0 &&
-          currentproduct.map((item)=>{
-           if(item.RAM !== undefined && item.RAM.length !== 0 ){
-            return(
-            <div className="productsize d-flex align-items-center">
-              <span>RAM :</span>
-              <ul className="lit list-inline mb-0 pl-4">
-                {
-                  item.RAM.map((RAM,index)=>{
-                    return(
-                <li className="list-inline-item">
-                  <a
-                    className={` tag ${activesie === index ? "active" : ""}`}
-                    onClick={() => isActive(index)}
-                  >
-                    {RAM} GB
-                  </a>
-                </li> 
-
-                    )
-
-                  })
-
-                }
-
-              </ul>
-            </div>
-
-            )
-
-           } 
-            
-          })
-            }
-            {
-          currentproduct.length !==0 &&
-          currentproduct.map((item)=>{
-           if(item.SIZE !== undefined && item.SIZE.length !== 0 ){
-            return(
-            <div className="productsize d-flex align-items-center">
-              <span>SIZE :</span>
-              <ul className="lit list-inline mb-0 pl-4">
-                {
-                  item.SIZE.map((SIZE,index)=>{
-                    return(
-                <li className="list-inline-item">
-                  <a
-                    className={` tag ${activesie === index ? "active" : ""}`}
-                    onClick={() => isActive(index)}
-                  >
-                    {SIZE} 
-                  </a>
-                </li> 
-
-                    )
-
-                  })
-
-                }
-
-              </ul>
-            </div>
-
-            )
-
-           } 
-            
-          })
-            }
-
-            <div className="addcartsection pt-4 pb-4 d-flex align-items-center">
-              <div className="countersec mr-3">
-                <input type="number" value={inputvalue} />
-                <span className="arrow plus " onClick={plus}>
-                  <KeyboardArrowUpIcon />
-                </span>
-                <span className="arrow minus " onClick={minus}>
-                  <KeyboardArrowDownIcon />
-                </span>
-              </div>
-              <Button className="btn-g btn-lg addtocartbtn">
-                <ShoppingCartOutlinedIcon />
-                Add to cart
-              </Button>
-              <Button className="move btn-lg btn-lg addtocartbtn ml-3  btn-border">
-                <FavoriteBorderOutlinedIcon />
-              </Button>
-              <Button className="move btn-lg btn-lg addtocartbtn ml-3  btn-border">
-                <CompareArrowsIcon />
-              </Button>
-            </div>
-          </div>
-
-              )
-            })
-          }
+                  <div className="addcartsection pt-4 pb-4 d-flex align-items-center">
+                    <div className="countersec mr-3">
+                      <input type="number" value={inputvalue} />
+                      <span className="arrow plus " onClick={plus}>
+                        <KeyboardArrowUpIcon />
+                      </span>
+                      <span className="arrow minus " onClick={minus}>
+                        <KeyboardArrowDownIcon />
+                      </span>
+                    </div>
+                    <Button className="btn-g btn-lg addtocartbtn">
+                      <ShoppingCartOutlinedIcon />
+                      Add to cart
+                    </Button>
+                    <Button className="move btn-lg btn-lg addtocartbtn ml-3  btn-border">
+                      <FavoriteBorderOutlinedIcon />
+                    </Button>
+                    <Button className="move btn-lg btn-lg addtocartbtn ml-3  btn-border">
+                      <CompareArrowsIcon />
+                    </Button>
+                  </div>
+                </div>
+              );
+            })}
           {/* productinfo code end here */}
         </div>
         <div className="card mt-5 p-5 detailspagetap">
@@ -337,21 +360,16 @@ const Details = (props) => {
 
             {activetaps === 0 && (
               <div className="tapcontant">
-                <p>
-                  Uninhibited carnally hired played in whimpered dear gorilla
-                  koala depending and much yikes off far quetzal goodness and
-                  from for grimaced goodness unaccountably and meadowlark near
-                  unblushingly crucial scallop tightly neurotic hungrily some
-                  and dear furiously this apart. Spluttered narrowly yikes left
-                  moth in yikes bowed this that grizzly much hello on spoon-fed
-                  that alas rethought much decently richly and wow against the
-                  frequent fluidly at formidable acceptably flapped besides and
-                  much circa far over the bucolically hey precarious goldfinch
-                  mastodon goodness gnashed a jellyfish and one however because.
-                </p>
+                {
+                  currentproduct.map((item)=>{
+                    return(
+                      <p>{item.description}</p>
+                    )
+                  })
+                }
 
                 <br />
-                <h1>Packaging & Delivery</h1>
+                {/*     <h1>Packaging & Delivery</h1>
                 <p>
                   Uninhibited carnally hired played in whimpered dear gorilla
                   koala depending and much yikes off far quetzal goodness and
@@ -363,7 +381,7 @@ const Details = (props) => {
                   frequent fluidly at formidable acceptably flapped besides and
                   much circa far over the bucolically hey precarious goldfinch
                   mastodon goodness gnashed a jellyfish and one however because.
-                </p>
+                </p> */}
                 <br />
               </div>
             )}
@@ -461,168 +479,60 @@ const Details = (props) => {
                 </div>
               </div>
             )}
+                    <h3>Customer questions & answers</h3>
+                    { 
+                      currentproduct.length !== 0 &&
+                      currentproduct.map((review)=>{
+                        review.reviews.length !== 0 &&
+                        review.reviews.map((review2,index)=>{
+                          return(
+                            <div className="card p-4 reviewscard flex-row" key={index}>
+                              <div className="image"> 
+                                <div className="rounded-circle">
+                                  <img src="https://nest-frontend-rtl.netlify.app/assets/imgs/blog/author-2.png" />
+                                </div>
+                                <span className="text-g d-block text-center font-weight-bold">
+                                  Sienna
+                                </span>
+                              </div>
+        
+                              <div className="info pl-5">
+                                <div className="datedes">
+                                  <h5 className="text-light">
+                                    December 4, 2022 at 3:12 pm
+                                  </h5>
+                                  <Rating
+                                    name="half-rating-read"
+                                    defaultValue={2.5}
+                                    precision={0.5}
+                                    readOnly
+                                    />
+                                </div>
+                               
+                                    <p>{review2.review}</p>
+                               
+                              </div>
+                            </div>                      
+                            )
+                            
+                            
+
+                            
+                           
+                          
+
+                          }) 
+
+                      })
+
+                    }
             {activetaps === 2 && (
               <div className="tapcontant">
                 <div className="row">
                   <div className="col-md-8">
-                    <h3>Customer questions & answers</h3>
+                 <br />
                     <br />
-                    <div className="card p-4 reviewscard flex-row">
-                      <div className="image">
-                        <div className="rounded-circle">
-                          <img src="https://nest-frontend-rtl.netlify.app/assets/imgs/blog/author-2.png" />
-                        </div>
-                        <span className="text-g d-block text-center font-weight-bold">
-                          Sienna
-                        </span>
-                      </div>
-
-                      <div className="info pl-5">
-                        <div className="datedes">
-                          <h5 className="text-light">
-                            December 4, 2022 at 3:12 pm
-                          </h5>
-                          <Rating
-                            name="half-rating-read"
-                            defaultValue={2.5}
-                            precision={0.5}
-                            readOnly
-                          />
-                        </div>
-                        <p>
-                          Uninhibited carnally hired played in whimpered dear
-                          gorilla koala depending and much yikes off far quetzal
-                          goodness and from for grimaced goodness unaccountably
-                          and meadowlark near unblushingly crucial scallop
-                          tightly neurotic hungrily some and dear furiously this
-                          apart. Spluttered narrowly yikes left moth in yikes
-                          bowed this that grizzly much hello on spoon-fed that
-                          alas rethought much decently richly and wow against
-                          the frequent fluidly at formidable acceptably flapped
-                          besides and much circa far over the bucolically hey
-                          precarious goldfinch mastodon goodness gnashed a
-                          jellyfish and one however because.
-                        </p>
-                      </div>
-                    </div>
-                    <div className="card p-4 reviewscard flex-row">
-                      <div className="image">
-                        <div className="rounded-circle">
-                          <img src="https://nest-frontend-rtl.netlify.app/assets/imgs/blog/author-2.png" />
-                        </div>
-                        <span className="text-g d-block text-center font-weight-bold">
-                          Sienna
-                        </span>
-                      </div>
-
-                      <div className="info pl-5">
-                        <div className="datedes">
-                          <h5 className="text-light">
-                            December 4, 2022 at 3:12 pm
-                          </h5>
-                          <Rating
-                            name="half-rating-read"
-                            defaultValue={2.5}
-                            precision={0.5}
-                            readOnly
-                          />
-                        </div>
-                        <p>
-                          Uninhibited carnally hired played in whimpered dear
-                          gorilla koala depending and much yikes off far quetzal
-                          goodness and from for grimaced goodness unaccountably
-                          and meadowlark near unblushingly crucial scallop
-                          tightly neurotic hungrily some and dear furiously this
-                          apart. Spluttered narrowly yikes left moth in yikes
-                          bowed this that grizzly much hello on spoon-fed that
-                          alas rethought much decently richly and wow against
-                          the frequent fluidly at formidable acceptably flapped
-                          besides and much circa far over the bucolically hey
-                          precarious goldfinch mastodon goodness gnashed a
-                          jellyfish and one however because.
-                        </p>
-                      </div>
-                    </div>
-                    <div className="card p-4 reviewscard flex-row">
-                      <div className="image">
-                        <div className="rounded-circle">
-                          <img src="https://nest-frontend-rtl.netlify.app/assets/imgs/blog/author-2.png" />
-                        </div>
-                        <span className="text-g d-block text-center font-weight-bold">
-                          Sienna
-                        </span>
-                      </div>
-
-                      <div className="info pl-5">
-                        <div className="datedes">
-                          <h5 className="text-light">
-                            December 4, 2022 at 3:12 pm
-                          </h5>
-                          <Rating
-                            name="half-rating-read"
-                            defaultValue={2.5}
-                            precision={0.5}
-                            readOnly
-                          />
-                        </div>
-                        <p>
-                          Uninhibited carnally hired played in whimpered dear
-                          gorilla koala depending and much yikes off far quetzal
-                          goodness and from for grimaced goodness unaccountably
-                          and meadowlark near unblushingly crucial scallop
-                          tightly neurotic hungrily some and dear furiously this
-                          apart. Spluttered narrowly yikes left moth in yikes
-                          bowed this that grizzly much hello on spoon-fed that
-                          alas rethought much decently richly and wow against
-                          the frequent fluidly at formidable acceptably flapped
-                          besides and much circa far over the bucolically hey
-                          precarious goldfinch mastodon goodness gnashed a
-                          jellyfish and one however because.
-                        </p>
-                      </div>
-                    </div>
-                    <div className="card p-4 reviewscard flex-row">
-                      <div className="image">
-                        <div className="rounded-circle">
-                          <img src="https://nest-frontend-rtl.netlify.app/assets/imgs/blog/author-2.png" />
-                        </div>
-                        <span className="text-g d-block text-center font-weight-bold">
-                          Sienna
-                        </span>
-                      </div>
-
-                      <div className="info pl-5">
-                        <div className="datedes">
-                          <h5 className="text-light">
-                            December 4, 2022 at 3:12 pm
-                          </h5>
-                          <Rating
-                            name="half-rating-read"
-                            defaultValue={2.5}
-                            precision={0.5}
-                            readOnly
-                          />
-                        </div>
-                        <p>
-                          Uninhibited carnally hired played in whimpered dear
-                          gorilla koala depending and much yikes off far quetzal
-                          goodness and from for grimaced goodness unaccountably
-                          and meadowlark near unblushingly crucial scallop
-                          tightly neurotic hungrily some and dear furiously this
-                          apart. Spluttered narrowly yikes left moth in yikes
-                          bowed this that grizzly much hello on spoon-fed that
-                          alas rethought much decently richly and wow against
-                          the frequent fluidly at formidable acceptably flapped
-                          besides and much circa far over the bucolically hey
-                          precarious goldfinch mastodon goodness gnashed a
-                          jellyfish and one however because.
-                        </p>
-                      </div>
-                    </div>
-
-                    <br />
-                    <br />
-
+ 
                     <form className="reviewform">
                       <h4>Add a review</h4>
                       <br />
@@ -773,35 +683,16 @@ const Details = (props) => {
         <div className="relatedproducts pt-5 pb-4">
           <h2 class="hd mb-0 mt-0">Related products</h2>
           <br />
-          {/* <Slider  {...related} className='prodSlider' >
-                <div className='item d-flex'>
-                    <Product col={"sale"}/>
-                </div>
-                <div className='item d-flex'>
-                    <Product col={"sale"}/>
-                </div>
-                <div className='item d-flex'>
-                    <Product col={"sale"}/>
-                </div>
-                <div className='item d-flex'>
-                    <Product col={"sale"}/>
-                </div>
-                <div className='item d-flex'>
-                    <Product col={"sale"}/>
-                </div>
-                <div className='item d-flex'>
-                    <Product col={"sale"}/>
-                </div>
-                <div className='item d-flex'>
-                    <Product col={"sale"}/>
-                </div>
-                <div className='item d-flex'>
-                    <Product col={"sale"}/>
-                </div>
-                <div className='item d-flex'>
-                    <Product col={"sale"}/>
-                </div>
-                </Slider> */}
+          <Slider {...related} className="prodSlider">
+            {relatedproducts.length !== 0 &&
+              relatedproducts.map((product, index) => {
+                return (
+                  <div className="item d-flex" key={index}>
+                    <Product col={product.type} item={product} />
+                  </div>
+                );
+              })}
+          </Slider>
         </div>
       </div>
     </section>

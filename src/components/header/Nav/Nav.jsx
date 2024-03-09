@@ -39,10 +39,11 @@ const Nav = (props) => {
                   navData.map((item, index) => {
                     return (
                       <li className="list-inline-item">
-                        <Button onClick={()=>{sessionStorage.setItem('cat',item.cat_name.toLowerCase())}}>
-                          <a href={`/cat/${item.cat_name.toLowerCase()}`}>
+                        <Button>
+                          <Link to={`/cat/${item.cat_name.toLowerCase()}`} 
+                          onClick={()=>{sessionStorage.setItem('cat',item.cat_name.toLowerCase())}}>
                             {item.cat_name} <KeyboardArrowDownIcon />
-                          </a>
+                          </Link>
                         </Button>
 
                         {item.items.length !== 0 && (
@@ -51,13 +52,14 @@ const Nav = (props) => {
                               {item.items.map((item2, index2) => {
                                 return (
                                   <li>
-                                    <Button  onClick={()=>{sessionStorage.setItem('cat',item.cat_name.toLowerCase())}}>
-                                      <a
-                                        href={`/cat/${item.cat_name.toLowerCase()}
+                                    <Button >
+                                      <Link
+                                      onClick={()=>{sessionStorage.setItem('cat',item.cat_name.toLowerCase())}}
+                                        to={`/cat/${item.cat_name.toLowerCase()}
                                     /${item2.cat_name.replace(/\s/g, '-').toLowerCase()}`}
                                       >
                                         {item2.cat_name}
-                                      </a>
+                                      </Link>
                                     </Button>
                                   </li>
                                 );
