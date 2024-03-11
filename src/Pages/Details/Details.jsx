@@ -11,10 +11,9 @@ import { Button } from "@mui/material";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
-import SideBar from "../../components/sidebar/SideBar";
 import Product from "../../components/Product/Product";
-/* import Rating from '@mui/material/Rating';
- */
+import axios from "axios";
+ 
 
 const Details = (props) => {
   const [currentproduct, setcurrentproduct] = useState([]);
@@ -24,6 +23,7 @@ const Details = (props) => {
   const goto = (url, index) => {
     setzoomImage(url);
   };
+
 
   const [prodCat, setprodCat] = useState({
     parentCat: sessionStorage.getItem("parentCat"),
@@ -84,9 +84,23 @@ const Details = (props) => {
     if (related_products.length !== 0) {
       setrelatedproducts(related_products);
     }
+    showReviews();
   }, [id]);
 
   const [activetaps, setactivetaps] = useState(0);
+  const [rating,setRating]=useState(0.0);
+  const [reviwesArr,setreviwesArr]=useState([])
+  const [reviewFields,setreviewFields] = useState({
+    review:'',
+    UserName:'',
+    rating:0.0,
+    productId:0 ,
+    date:''
+
+
+  })
+
+
 
   var settings = {
     dots: false,
@@ -105,6 +119,72 @@ const Details = (props) => {
     slidesToScroll: 1,
     fade: false,
   };
+
+  
+
+  const changeInput=(name , value)=>{
+    if(name==="rating"){
+      setRating(value)
+
+    }
+    setreviewFields(()=>({
+      ...reviewFields,
+      [name]: value,
+      productId:id,
+      date:new Date().toLocaleString()
+
+    }))
+  
+  
+  }
+  const reviews_Arr = []
+  const submitReview=async(e)=>{
+    e.preventDefault();
+    try{
+     await axios.post("http://localhost:5000/productReviews",reviewFields).then((response)=>{
+    reviews_Arr.push(response.data)
+    setreviewFields(()=>({
+      review:'',
+      UserName:'',
+      rating:0.0,
+      productId:0,
+      date:''
+
+
+    }))
+     })
+
+    }catch(error){
+      console.log(error.message);
+    }
+    showReviews()
+  }
+
+  const reviews_Arr2 =[]
+  const showReviews=async()=>{
+    try{
+      await axios.get("http://localhost:5000/productReviews").then((response)=>{
+        if(response.data.length !==0){
+          response.data.map((item)=>{
+            if(parseInt(item.productId)===parseInt(id)){
+              reviews_Arr2.push(item)
+            }
+
+          })
+        }
+      })
+
+    }catch(error){
+      console.log(error.message);
+    }
+    if(reviews_Arr2.length !== 0 ){
+      setreviwesArr(
+        reviews_Arr2)
+
+    }
+
+  }
+
   return (
     <section className="detailsPage mb-5">
       <div className="breadcrumbwrapper mb-4">
@@ -360,13 +440,9 @@ const Details = (props) => {
 
             {activetaps === 0 && (
               <div className="tapcontant">
-                {
-                  currentproduct.map((item)=>{
-                    return(
-                      <p>{item.description}</p>
-                    )
-                  })
-                }
+                {currentproduct.map((item) => {
+                  return <p>{item.description}</p>;
+                })}
 
                 <br />
                 {/*     <h1>Packaging & Delivery</h1>
@@ -479,12 +555,44 @@ const Details = (props) => {
                 </div>
               </div>
             )}
-         
-                        <h3>
-                   
-                      Customer questions & answers 
-                    </h3>
-                {/*     <div className="card p-4 reviewscard flex-row" >
+
+            <h3>Customer questions & answers</h3>
+             {
+              reviwesArr.length !== 0 && reviwesArr !== undefined &&
+                reviwesArr.map((review,index)=>{
+                  return(
+                    <div className="card p-4 reviewscard flex-row" key={index} >
+                              <div className="image"> 
+                                <div className="rounded-circle">
+                                  <img src="https://nest-frontend-rtl.netlify.app/assets/imgs/blog/author-2.png" />
+                                </div>
+                                <span className="text-g d-block text-center font-weight-bold">
+                                  {review.UserName}
+                                </span>
+                              </div>
+        
+                              <div className="info pl-5">
+                                <div className="datedes">
+                                  <h5 className="text-light">
+                                    {review.date}
+                                  </h5>
+                                  <Rating
+                                    name="half-rating-read"
+                                    defaultValue={parseFloat(review.rating)}
+                                    precision={0.5}
+                                    readOnly
+                                    />
+                                </div>
+                               
+                                    <p>{review.review}</p>
+                               
+                              </div>
+                    </div>
+
+                  )
+                })
+            } 
+                 {/*    <div className="card p-4 reviewscard flex-row" >
                               <div className="image"> 
                                 <div className="rounded-circle">
                                   <img src="https://nest-frontend-rtl.netlify.app/assets/imgs/blog/author-2.png" />
@@ -564,56 +672,32 @@ const Details = (props) => {
                                     <p>helllo</p>
                                
                               </div>
-                    </div>
-                    <div className="card p-4 reviewscard flex-row" >
-                              <div className="image"> 
-                                <div className="rounded-circle">
-                                  <img src="https://nest-frontend-rtl.netlify.app/assets/imgs/blog/author-2.png" />
-                                </div>
-                                <span className="text-g d-block text-center font-weight-bold">
-                                  Sienna
-                                </span>
-                              </div>
-        
-                              <div className="info pl-5">
-                                <div className="datedes">
-                                  <h5 className="text-light">
-                                    December 4, 2022 at 3:12 pm
-                                  </h5>
-                                  <Rating
-                                    name="half-rating-read"
-                                    defaultValue={2.5}
-                                    precision={0.5}
-                                    readOnly
-                                    />
-                                </div>
-                               
-                                    <p>helllo</p>
-                               
-                              </div>
-                    </div>
- */}
+                    </div> */}
+ 
             {activetaps === 2 && (
               <div className="tapcontant">
                 <div className="row">
                   <div className="col-md-8">
-                 <br />
                     <br />
- 
-                    <form className="reviewform">
+                    <br />
+
+                    <form className="reviewform" onSubmit={submitReview}>
                       <h4>Add a review</h4>
                       <br />
 
                       <div className="form-group">
-                   
-                              <textarea
-                                placeholder= "Write a Review" 
-                                name=""
-                                id=""
-                                cols="30"
-                                rows="10"
-                                className="form-control "
-                              ></textarea>
+                        <textarea
+                          placeholder="Write a Review"
+                          name="review"
+                          id=""
+                          value={reviewFields.review}
+                          cols="30"
+                          rows="10"
+                          className="form-control "
+                          onChange={(e)=>changeInput(e.target.name , e.target.value)}
+                          
+
+                        ></textarea>
                       </div>
                       <div className="row">
                         <div className="col-md-6">
@@ -621,30 +705,36 @@ const Details = (props) => {
                             <input
                               placeholder="Name"
                               type="text"
+                              value={reviewFields.name}
                               className="form-control"
-                            />
+                              name="UserName"
+                              onChange={(e)=>changeInput(e.target.name , e.target.value)}
+                                />
                           </div>
                         </div>
                         <div className="col-md-6">
                           <div className="form-group">
-                            <input
-                              placeholder="Emaile"
-                              type="text"
-                              className="form-control"
-                            />
+                          <Rating name="rating"
+                           Value={rating}
+                          precision={0.5}
+                          onChange={(e)=>changeInput(e.target.name , e.target.value)}
+
+                        
+                          />
+
                           </div>
                         </div>
 
-                        <div className="form-group">
+                     {/*    <div className="form-group">
                           <input
                             type="text"
                             className="form-control"
                             placeholder="Website"
                           />
-                        </div>
+                        </div> */}
                         <br />
                         <div className="form-group">
-                          <Button className="btn-g btn-lg">
+                          <Button className="btn-g btn-lg" type="submit">
                             {" "}
                             Submit Review
                           </Button>

@@ -309,12 +309,14 @@ padding-right: 20px !important;
 }
 .reviewscard .info{
     padding-left: 25px;
+    width: 100%;
    
 }
 .reviewscard .datedes{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between !important;
     align-items: center;
+    width: 100% !important;
 }
 .reviewscard{
     margin-bottom: 25px;
