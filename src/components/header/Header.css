@@ -1,36 +1,148 @@
- header{width: 100%; height: auto; margin: auto; padding:30px 0px ; background: #fff;}
- .headerWrapper{position: fixed; top: 0; z-index: 10000; background: #fff; transition:
-     all 0.8s ease-in-out; left: 0; width: 100%; z-index: 1000;}
-
-.headerWrapper.fixed{ top: -126px ;}
-.container-fluid{padding: 0px 45px;}
-.headerSearch{width:100%;height: 60px; border: 1px solid #bce3c9; padding: 10px 20px; cursor: pointer; border-radius: 4px;}
-.countryWrapper .celectDropWrapper{width: 200px !important;height:  45px;
-   padding-left: 10px;  border: 1px solid rgba(0,0,0,0.2);
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);}
-.celectDrop{width: 18%; font-size: 16px; font-weight: 500; position: relative;}
-.celectDrop::after{content: ''; width: 1px; height: 30px; background: rgba(0,0,0,0.2); position: absolute; top: 0;right: 0;}
-.search{width: 82%; padding-left: 30px; position: relative;}
-.search input{width: 100%; height:50px; border: 0px; outline: none !important; font-size: 18px;}
-.searchIcon{position: absolute;top: 12px;right: 0px; cursor: pointer; opacity: 0.5; font-size: 30px !important;} 
-.countryWrapper .celectDropWrapper{display: flex;align-items: center;} 
-.headerTabs{padding-left: 40px; gap: 20px;}
-.headerTabs li{position: relative; margin-left: 20px;}
-.headerTabs li{font-size: 12px
-    ; cursor: pointer;}
-.headerTabs li span img{margin-right: 10px;}
-.headerTabs li span .badge{width: 20px; height: 20px; color: #fff; position: absolute; top: -8px;left: 15px; }
-.badge{display: flex; align-items: center; justify-content: center;}
-.list-inline-item span{font-size: 16px;}
-.afterHeader{
-    margin-top: 210px;
+header {
+  width: 100%;
+  height: auto;
+  margin: auto;
+  padding: 30px 0px;
+  background: #fff;
 }
-.dropdownmenu{position: absolute; top: 40px; right: -60px; width: 200px; height: auto; background: #fff;
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05); padding: 10px 0px; z-index: 100; }
-.dropdownmenu li{width:100% !important;  list-style: none; margin: 0px !important;}
-.dropdownmenu li button{width: 100%; text-align: left !important; justify-content: flex-start !important;
-color:rgba(0,0,0,0.5) !important; text-transform: capitalize !important; font-size: 16px !important; padding: 10px 15px;}
-.dropdownmenu li button svg{opacity:0.5 ; margin-right: 8px !important;}
+.headerWrapper {
+  position: fixed;
+  top: 0;
+  z-index: 10000;
+  background: #fff;
+  transition: all 0.8s ease-in-out;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.headerWrapper.fixed {
+  top: -126px;
+}
+.container-fluid {
+  padding: 0px 45px;
+}
+.headerSearch {
+  width: 100%;
+  height: 60px;
+  border: 1px solid #bce3c9;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.countryWrapper .celectDropWrapper {
+  width: 200px !important;
+  height: 45px;
+  padding-left: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+.celectDrop {
+  width: 18%;
+  font-size: 16px;
+  font-weight: 500;
+  position: relative;
+}
+.celectDrop::after {
+  content: "";
+  width: 1px;
+  height: 30px;
+  background: rgba(0, 0, 0, 0.2);
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.search {
+  width: 82%;
+  padding-left: 30px;
+  position: relative;
+}
+.search input {
+  width: 100%;
+  height: 50px;
+  border: 0px;
+  outline: none !important;
+  font-size: 18px;
+}
+.searchIcon {
+  position: absolute;
+  top: 12px;
+  right: 0px;
+  cursor: pointer;
+  opacity: 0.5;
+  font-size: 30px !important;
+}
+.countryWrapper .celectDropWrapper {
+  display: flex;
+  align-items: center;
+}
+.headerTabs {
+  padding-left: 40px;
+  gap: 20px;
+}
+.headerTabs li {
+  position: relative;
+  margin-left: 20px;
+}
+.headerTabs li {
+  font-size: 12px;
+  cursor: pointer;
+}
+.headerTabs li span img {
+  margin-right: 10px;
+}
+.headerTabs li span .badge {
+  width: 20px;
+  height: 20px;
+  color: #fff;
+  position: absolute;
+  top: -8px;
+  left: 15px;
+}
+.badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.list-inline-item span {
+  font-size: 16px;
+}
+.list-inline-item span a {
+  text-decoration: none !important;
+  color: black;
+}
+.afterHeader {
+  margin-top: 210px;
+}
+.dropdownmenu {
+  position: absolute;
+  top: 40px;
+  right: -60px;
+  width: 200px;
+  height: auto;
+  background: #fff;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05);
+  padding: 10px 0px;
+  z-index: 100;
+}
+.dropdownmenu li {
+  width: 100% !important;
+  list-style: none;
+  margin: 0px !important;
+}
+.dropdownmenu li button {
+  width: 100%;
+  text-align: left !important;
+  justify-content: flex-start !important;
+  color: rgba(0, 0, 0, 0.5) !important;
+  text-transform: capitalize !important;
+  font-size: 16px !important;
+  padding: 10px 15px;
+}
+.dropdownmenu li button svg {
+  opacity: 0.5;
+  margin-right: 8px !important;
+}
 /* 
 .selectDropWrapper .openSelect{display: block; padding: 10px 0px; position: relative; font-weight: 600; font-size: 18px !important;}  
 .selectDropWrapper .openSelect .arrow{position: absolute; top: 8px; right: 5px; font-size: 25px;} 

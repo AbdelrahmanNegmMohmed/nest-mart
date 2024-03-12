@@ -13,6 +13,7 @@ import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlin
 import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
 import Product from "../../components/Product/Product";
 import axios from "axios";
+import QuantityBox from "../../components/quantityBox/QuantityBox";
  
 
 const Details = (props) => {
@@ -377,17 +378,13 @@ const Details = (props) => {
                         );
                       }
                     })}
+                    <div className="d-flex align-items-center">
+                      <div >
+                           <QuantityBox/>
 
-                  <div className="addcartsection pt-4 pb-4 d-flex align-items-center">
-                    <div className="countersec mr-3">
-                      <input type="number" value={inputvalue} />
-                      <span className="arrow plus " onClick={plus}>
-                        <KeyboardArrowUpIcon />
-                      </span>
-                      <span className="arrow minus " onClick={minus}>
-                        <KeyboardArrowDownIcon />
-                      </span>
-                    </div>
+                      </div>
+                  <div className="d-flex align-items-center ml-3" style={{paddingLeft:"20px"}}>
+                    
                     <Button className="btn-g btn-lg addtocartbtn">
                       <ShoppingCartOutlinedIcon />
                       Add to cart
@@ -399,6 +396,8 @@ const Details = (props) => {
                       <CompareArrowsIcon />
                     </Button>
                   </div>
+
+                    </div>
                 </div>
               );
             })}

@@ -17,7 +17,7 @@ import TuneIcon from '@mui/icons-material/Tune';
 import PinDropIcon from '@mui/icons-material/PinDrop';
 import { ClickAwayListener } from '@mui/base/ClickAwayListener';
 import Nav from './Nav/Nav';
-
+import { Link } from 'react-router-dom';
 
 const Header = (props) => {
   const[isDropdowen,setisOpenDropDowen]=useState(false)
@@ -126,9 +126,11 @@ const Header = (props) => {
                   </li>
                   <li className="list-inline-item">
                       <span >
+                    <Link to={'/cart'}>
                         <img src={icon_cart} alt=""/>
                         <span className='badge bg-success rounded-circle '>2</span>
                         Cart
+                    </Link>
                         </span>               
                   </li>
                   <li className="list-inline-item">
