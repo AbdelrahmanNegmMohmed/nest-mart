@@ -128,7 +128,7 @@ const Header = (props) => {
                       <span >
                     <Link to={'/cart'}>
                         <img src={icon_cart} alt=""/>
-                        <span className='badge bg-success rounded-circle '>2</span>
+                        <span className='badge bg-success rounded-circle '>{props.cartItemsCount}</span>
                         Cart
                     </Link>
                         </span>               

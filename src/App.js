@@ -65,7 +65,7 @@ function App() {
     productData.length !== 0 && (
       <BrowserRouter>
       <Mycontext.Provider value={value}>
-        <Header data={productData}/>
+        <Header data={productData} cartItemsCount={cartItems.length}/>
         <Routes>
           <Route exact={true} path="/" element={<Home data={productData}/>} />
           <Route exact={true} path="/cat/:id" element={<Listing data={productData} single={true}/>} />
