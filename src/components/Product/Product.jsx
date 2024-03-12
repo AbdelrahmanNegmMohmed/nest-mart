@@ -8,9 +8,12 @@ import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlin
 import CompareArrowsOutlinedIcon from "@mui/icons-material/CompareArrowsOutlined";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import context from "react-bootstrap/esm/AccordionContext";
+import {Mycontext} from '../../App'
+import { useContext } from "react";
 const Product = (props) => {
   const [productData, setproductData] = useState();
   const [productData2, setproductData2] = useState();
+  const context = useContext(Mycontext)
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -27,7 +30,7 @@ const Product = (props) => {
       sessionStorage.setItem('subCatName',productData.subCatName); 
   }
   const addToCart=(item)=>{
-    console.log(item);
+    context.addToCart(item)
   
   } 
   return (

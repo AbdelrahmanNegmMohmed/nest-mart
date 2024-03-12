@@ -17,6 +17,7 @@ const Mycontext =createContext();
 
 function App() {
   const [productData, setproductData] = useState([]);
+  const [cartItems,setcartItems] = useState([])
   useEffect(() => {
     getData("http://localhost:5000/productData");
   }, []);
@@ -30,8 +31,15 @@ function App() {
     } catch (error) {
       console.log(error.massage);
     }
-  };
+  }
+
+
+  const addToCart=(item)=>{
+    console.log(item);
+  }
+
  const value ={
+  addToCart
 
 }
  
@@ -58,3 +66,4 @@ function App() {
 }
 
 export default App;
+export {Mycontext};
