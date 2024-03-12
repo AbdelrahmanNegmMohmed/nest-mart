@@ -34,8 +34,26 @@ function App() {
   }
 
 
-  const addToCart=(item)=>{
-    console.log(item);
+  const addToCart= async(item)=>{
+    item.quantity = 1
+    try{
+      await axios.post("http://localhost:5000/cartItems",item).then((res)=>{
+        if(res !== undefined){
+          setcartItems([
+            ...cartItems,
+            {
+              ...item,
+              quantity:1
+            }
+          ])
+        }
+      })
+
+
+    }catch(error){
+      console.log(error.massage);
+
+    }
   }
 
  const value ={
