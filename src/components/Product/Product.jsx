@@ -7,6 +7,7 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import CompareArrowsOutlinedIcon from "@mui/icons-material/CompareArrowsOutlined";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
+import context from "react-bootstrap/esm/AccordionContext";
 const Product = (props) => {
   const [productData, setproductData] = useState();
   const [productData2, setproductData2] = useState();
@@ -24,8 +25,11 @@ const Product = (props) => {
   const setproductCat=()=> {
       sessionStorage.setItem('parentCat',productData.parentCatName);
       sessionStorage.setItem('subCatName',productData.subCatName); 
-
   }
+  const addToCart=(item)=>{
+    console.log(item);
+  
+  } 
   return (
     <div onClick={setproductCat} className="productThumb">
       {props.col !== null && props.col !== undefined && (
@@ -86,7 +90,7 @@ const Product = (props) => {
                 </span>
                 <span className="old_pricre">EGP {productData.oldPrice}</span>
               </div>
-              <Button className=" ml-auto transition">
+              <Button className=" ml-auto transition"  onClick={()=>addToCart(productData)}>
                 <ShoppingCartOutlinedIcon />
                 Add
               </Button>

@@ -6,7 +6,7 @@ import Rating from "@mui/material/Rating";
 import QuantityBox from "../../components/quantityBox/QuantityBox";
 import { Button } from "@mui/material";
 
-const Cart = () => {
+const Cart = () => { 
 
   return (
     <div>

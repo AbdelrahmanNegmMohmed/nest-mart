@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./components/header/Header";
@@ -10,6 +10,10 @@ import NotFound from "./Pages/NoutFound/NotFound";
 import Details from "./Pages/Details/Details";
 import axios from "axios";
 import Cart from "./Pages/Cart/Cart";
+ 
+
+
+const Mycontext =createContext();
 
 function App() {
   const [productData, setproductData] = useState([]);
@@ -27,11 +31,14 @@ function App() {
       console.log(error.massage);
     }
   };
+ const value ={
 
-
+}
+ 
   return (
     productData.length !== 0 && (
       <BrowserRouter>
+      <Mycontext.Provider value={value}>
         <Header data={productData}/>
         <Routes>
           <Route exact={true} path="/" element={<Home data={productData}/>} />
@@ -43,6 +50,8 @@ function App() {
 
         </Routes>
         <TopPro />
+
+      </Mycontext.Provider>  
       </BrowserRouter>
     )
   );
