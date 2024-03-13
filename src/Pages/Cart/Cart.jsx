@@ -1,12 +1,30 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Cart.css";
 import { Link } from "react-router-dom";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import Rating from "@mui/material/Rating";
 import QuantityBox from "../../components/quantityBox/QuantityBox";
 import { Button } from "@mui/material";
+import { Mycontext } from "../../App";
+import axios from "axios";
 
-const Cart = () => { 
+const Cart = () => {
+  const [cartItems, setcartItems] = useState([]);
+  const context = useContext(Mycontext);
+
+  useEffect(() => {
+    getCartData("http://localhost:5000/cartItems");
+  }, []);
+
+  const getCartData = async (url) => {
+    try {
+      await axios.get(url).then((response) => {
+        setcartItems(response.data);
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   return (
     <div>
@@ -51,164 +69,53 @@ const Cart = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>
-                          <div className="d-flex align-items-center">
-                            <div className="img">
-                              <img
-                                src="https://www.jiomart.com/images/product/original/491432711/moong-dal-2-kg-product-images-o491432711-p491432711-0-202205191636.jpg"
-                                className="w-100"
-                              />
-                            </div>
-                            <div className="info">
-                              <Link>
-                                <h4>jjjdh jhasmjmdj jsjjujnsjujs jndnm</h4>
-                              </Link>
-                              <Rating
-                                name="half-rating-read"
-                                value={4.5}
-                                precision={0.5}
-                                readOnly
-                              />
-                              <span className="text-light">(4.5)</span>
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                          <span>$2.51</span>
-                        </td>
-                        <td>
-                        <QuantityBox/>
-                        
-                        </td>
-                        <td>
-                          <span className="text-g">$2.51</span>
-                        </td>
-                        <td>
-                          <span className="cursor">
-                            <DeleteOutlineOutlinedIcon />
-                          </span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div className="d-flex align-items-center">
-                            <div className="img">
-                              <img
-                                src="https://www.jiomart.com/images/product/original/491432711/moong-dal-2-kg-product-images-o491432711-p491432711-0-202205191636.jpg"
-                                className="w-100"
-                              />
-                            </div>
-                            <div className="info">
-                              <Link>
-                                <h4>jjjdh jhasmjmdj jsjjujnsjujs jndnm</h4>
-                              </Link>
-                              <Rating
-                                name="half-rating-read"
-                                value={4.5}
-                                precision={0.5}
-                                readOnly
-                              />
-                              <span className="text-light">(4.5)</span>
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                          <span>$2.51</span>
-                        </td>
-                        <td>
-                        <QuantityBox/>
- 
-                        </td>
-                        <td>
-                          <span className="text-g">$2.51</span>
-                        </td>
-                        <td>
-                          <span className="cursor">
-                            <DeleteOutlineOutlinedIcon />
-                          </span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div className="d-flex align-items-center">
-                            <div className="img">
-                              <img
-                                src="https://www.jiomart.com/images/product/original/491432711/moong-dal-2-kg-product-images-o491432711-p491432711-0-202205191636.jpg"
-                                className="w-100"
-                              />
-                            </div>
-                            <div className="info">
-                              <Link>
-                                <h4>jjjdh jhasmjmdj jsjjujnsjujs jndnm</h4>
-                              </Link>
-                              <Rating
-                                name="half-rating-read"
-                                value={4.5}
-                                precision={0.5}
-                                readOnly
-                              />
-                              <span className="text-light">(4.5)</span>
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                          <span>$2.51</span>
-                        </td>
-                        <td>
-                        <QuantityBox/>
-
-                        </td>
-                        <td>
-                          <span className="text-g">$2.51</span>
-                        </td>
-                        <td>
-                          <span className="cursor">
-                            <DeleteOutlineOutlinedIcon />
-                          </span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div className="d-flex align-items-center">
-                            <div className="img">
-                              <img
-                                src="https://www.jiomart.com/images/product/original/491432711/moong-dal-2-kg-product-images-o491432711-p491432711-0-202205191636.jpg"
-                                className="w-100"
-                              />
-                            </div>
-                            <div className="info">
-                              <Link>
-                                <h4>jjjdh jhasmjmdj jsjjujnsjujs jndnm</h4>
-                              </Link>
-                              <Rating
-                                name="half-rating-read"
-                                value={4.5}
-                                precision={0.5}
-                                readOnly
-                              />
-                              <span className="text-light">(4.5)</span>
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                          <span>$2.51</span>
-                        </td>
-                        <td>
-                        <QuantityBox/>
-
-                        </td>
-                        <td>
-                          <span className="text-g">$2.51</span>
-                        </td>
-                        <td>
-                          <span className="cursor">
-                            <DeleteOutlineOutlinedIcon />
-                          </span>
-                        </td>
-                      </tr>
-
-                 
+                      {cartItems.length !== 0 &&
+                        cartItems.map((item, index) => {
+                          return (
+                            <tr>
+                              <td>
+                                <div className="d-flex align-items-center">
+                                <Link to={`/product/${item.id}`}>
+                                  <div className="img">
+                                    <img
+                                    src={item.catImg}
+                                      className="w-100"
+                                    />
+                                  </div>
+                                  </Link>
+                                  <div className="info">
+                                    <Link to={`/product/${item.id}`}>
+                                      <h4>
+                                        {item.productName}
+                                      </h4>
+                                    </Link>
+                                    <Rating
+                                      name="half-rating-read"
+                                      value={parseFloat(item.rating)}
+                                      precision={0.5}
+                                      readOnly
+                                    />
+                                    <span className="text-light">({parseFloat(item.rating)})</span>
+                                  </div>
+                                </div>
+                              </td>
+                              <td>
+                                <span>EGP:{parseInt(item.price.split(",").join("")) }</span>
+                              </td>
+                              <td>
+                                <QuantityBox />
+                              </td>
+                              <td>
+                                <span className="text-g">$2.51</span>
+                              </td>
+                              <td>
+                                <span className="cursor">
+                                  <DeleteOutlineOutlinedIcon />
+                                </span>
+                              </td>
+                            </tr>
+                          );
+                        })}
                     </tbody>
                   </table>
                 </div>
