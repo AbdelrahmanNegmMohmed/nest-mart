@@ -81,7 +81,7 @@ const Cart = () => {
                         cartItems.map((item, index) => {
                           return (
                             <tr>
-                              <td>
+                              <td width={"50%"}>
                                 <div className="d-flex align-items-center">
                                 <Link to={`/product/${item.id}`}>
                                   <div className="img">
@@ -110,7 +110,7 @@ const Cart = () => {
                               <td>
                                 <span>EGP:{parseInt(item.price.split(",").join("")) }</span>
                               </td>
-                              <td>
+                              <td width={"20%"}>
                                 <QuantityBox item={item} cartItems={cartItems} index={index} updateCart={updateCart} />
                               </td>
                               <td>
@@ -134,6 +134,17 @@ const Cart = () => {
                   </table>
                 </div>
               </div>
+              <br />
+              <div className="d-flex alingn-items-center">
+                <Link to="/">
+                  <Button className="btn-g">
+                    Continue Shopping
+                  
+
+                  </Button>
+                </Link>
+
+              </div>
               {/*  <div className="cartWapper mt-4">
                 <div className="table-responsive">
                   <table className="table">
@@ -151,7 +162,7 @@ const Cart = () => {
               </div> */}
             </div>
 
-            <div className="col-md-5 cartRightBox">
+            <div className="col-md-4 cartRightBox">
               <div className="card p-4">
                 <div className="d-flex align-items-center mb-4">
                   <h5 className="mb-0 text-light">subtotal</h5>
@@ -184,7 +195,17 @@ const Cart = () => {
                 <div className="d-flex align-items-center mb-4">
                   <h5 className="mb-0 text-light">Total</h5>
                   <h3 className="ml-auto mb-0 font-weight-bold">
-                    <span className="text-g">$12.31</span>
+                    <span className="text-g">
+
+
+                    {
+                        cartItems.length !== 0 &&
+                          cartItems.map(item => parseInt(item.price.split(",").join(""))*item.quantity).reduce((total,value)=>
+                          total + value, 0
+                          )
+
+                      }
+                    </span>
                   </h3>
                 </div>
                 <br />

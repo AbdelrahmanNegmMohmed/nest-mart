@@ -14,6 +14,7 @@ const Product = (props) => {
   const [productData, setproductData] = useState();
   const [productData2, setproductData2] = useState();
   const context = useContext(Mycontext)
+  const [isadd,setisadd]=useState(false)
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -31,6 +32,7 @@ const Product = (props) => {
   }
   const addToCart=(item)=>{
     context.addToCart(item)
+    setisadd(true)
   
   } 
   return (
@@ -95,7 +97,9 @@ const Product = (props) => {
               </div>
               <Button className=" ml-auto transition"  onClick={()=>addToCart(productData)}>
                 <ShoppingCartOutlinedIcon />
-                Add
+                {
+                  isadd === true?"Added":"Add"
+                }
               </Button>
             </div>
           </div>

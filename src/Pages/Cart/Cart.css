@@ -39,6 +39,12 @@ ul.breadcrumb li a:hover {
   width: 100%;
   height: auto;
   padding: 35px 0px;
+
+}
+.cartSection .row{
+  display: flex;
+  justify-content: space-around;
+
 }
 .text-g {
   color: #3bb77e;
@@ -109,4 +115,8 @@ ul.breadcrumb li a:hover {
 }
 .cartRightBox{
     padding-left: 100px;
+}
+.cartRightBox .card{
+  position: sticky;
+  top: 150px;
 }
