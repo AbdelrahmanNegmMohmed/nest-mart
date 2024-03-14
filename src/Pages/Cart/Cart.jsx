@@ -25,6 +25,9 @@ const Cart = () => {
       console.log(error.message);
     }
   };
+  const emptyCart=()=>{
+    setcartItems([])
+  }
 
   return (
     <div>
@@ -51,7 +54,9 @@ const Cart = () => {
                     cart
                   </p>
                 </div>
-                <span className="left-cler cletCart d-flex align-items-center cursor">
+                <span className="left-cler cletCart d-flex align-items-center cursor"
+                onClick={()=>emptyCart()}
+                >
                   <DeleteOutlineOutlinedIcon />
                   Clear-Cart
                 </span>

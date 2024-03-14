@@ -20,6 +20,7 @@ function App() {
   const [cartItems,setcartItems] = useState([])
   useEffect(() => {
     getData("http://localhost:5000/productData");
+
   }, []);
  
 
@@ -57,9 +58,15 @@ function App() {
   }
 
  const value ={
-  addToCart
+  addToCart,
+  cartItems,
+  /* removeItemFromCart */
 
 }
+/* const removeItemFromCart = (id)=>{
+  const arr=cartItems.filter((obj)=> obj.id !== id);
+  setcartItems(arr)
+} */
  
   return (
     productData.length !== 0 && (
