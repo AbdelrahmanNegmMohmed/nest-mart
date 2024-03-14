@@ -52,7 +52,30 @@ const updateCart = (items)=>{
       >
         <KeyboardArrowUpIcon />
       </span>
-      <span className="arrow minus "/*  onClick={minus} */>
+      <span className="arrow minus "/*  onClick={minus} */
+      onClick={
+        ()=>{
+          if(inputvalue !== 1){
+            setinputvalue(inputvalue - 1)
+          }
+          const _cart =props.cartItems?.map((cartItems,key)=>{
+            return key === parseInt(props.index)?
+            {
+              ...cartItems,
+              quantity:cartItems.quantity !== 1?
+              inputvalue-1 :cartItems.quantity
+            }:
+            {
+              ...cartItems
+            }
+          })
+          updateCart(_cart)
+          setcartItems(_cart)
+          
+          
+        }
+      }
+      >
         <KeyboardArrowDownIcon />
       </span>
     </div>
