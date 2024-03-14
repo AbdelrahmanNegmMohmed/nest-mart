@@ -28,6 +28,9 @@ const Cart = () => {
   const emptyCart=()=>{
     setcartItems([])
   }
+  const updateCart =  (items) =>{
+    setcartItems(items)
+  }
 
   return (
     <div>
@@ -108,10 +111,16 @@ const Cart = () => {
                                 <span>EGP:{parseInt(item.price.split(",").join("")) }</span>
                               </td>
                               <td>
-                                <QuantityBox />
+                                <QuantityBox item={item} cartItems={cartItems} index={index} updateCart={updateCart} />
                               </td>
                               <td>
-                                <span className="text-g">$2.51</span>
+                                <span className="text-g">
+                                  EGP: {
+                                    parseInt(item.price.split(",").join("")*parseInt(item.quantity))
+
+                                  }
+                                  
+                                  </span>
                               </td>
                               <td>
                                 <span className="cursor">
