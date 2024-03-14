@@ -32,7 +32,6 @@ const updateCart = (items)=>{
       onClick={
         ()=>{
           setinputvalue(inputvalue+1)
-          console.log(inputvalue);
           const _cart =props.cartItems?.map((cartItems,key)=>{
             return key === parseInt(props.index)?
             {

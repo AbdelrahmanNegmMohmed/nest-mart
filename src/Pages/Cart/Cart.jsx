@@ -156,7 +156,17 @@ const Cart = () => {
                 <div className="d-flex align-items-center mb-4">
                   <h5 className="mb-0 text-light">subtotal</h5>
                   <h3 className="ml-auto mb-0 font-weight-bold">
-                    <span className="text-g">$12.31</span>
+                    <span className="text-g">
+                      {
+                        cartItems.length !== 0 &&
+                          cartItems.map(item => parseInt(item.price.split(",").join(""))*item.quantity).reduce((total,value)=>
+                          total + value, 0
+                          )
+
+                      }
+                         
+                    
+                    </span>
                   </h3>
                 </div>
                 <div className="d-flex align-items-center mb-4">
