@@ -10,9 +10,8 @@ import NotFound from "./Pages/NoutFound/NotFound";
 import Details from "./Pages/Details/Details";
 import axios from "axios";
 import Cart from "./Pages/Cart/Cart";
- 
-
-
+import SignUp from "./Pages/signIUp/SignUp";
+import Signin from "./Pages/signIn/SignUp";
 const Mycontext =createContext();
 
 function App() {
@@ -80,6 +79,8 @@ function App() {
           <Route exact={true} path="/product/:id" element={<Details data={productData}/>}  />
           <Route exact={true} path="*" element={<NotFound />} />
           <Route exact={true} path="/cart" element={<Cart />} />
+          <Route exact={true} path="/signUp" element={<SignUp />} />
+          <Route exact={true} path="/signin" element={<Signin />} />
 
         </Routes>
         <TopPro />
