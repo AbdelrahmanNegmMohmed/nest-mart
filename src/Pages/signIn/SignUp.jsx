@@ -11,6 +11,11 @@ import { app } from "../../firebase";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 
+import { useNavigate } from 'react-router-dom';
+import { useContext } from "react";
+import { Mycontext } from "../../App";
+
+
 const auth = getAuth(app);
 
 const Signin = () => {
@@ -21,6 +26,7 @@ const Signin = () => {
     email:"",
     password:"",
   });
+  const context = useContext(Mycontext);
   const onChangeFirld = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -28,8 +34,8 @@ const Signin = () => {
       ...formFields,
       [name]: value,
     }));
-    console.log(formFields);
   };
+  const history = useNavigate();
 
 
   const signIn = () => {
@@ -43,14 +49,18 @@ const Signin = () => {
           email:"",
           password:"",
         });
+        localStorage.setItem('isLogin',true);
+        context.signIn();
+        history('/ ')
  
       })
+
+
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
       });
   };
-
   return (
     <>
       <section className="signIn mb-5">

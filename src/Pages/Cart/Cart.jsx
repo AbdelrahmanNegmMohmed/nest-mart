@@ -7,13 +7,21 @@ import QuantityBox from "../../components/quantityBox/QuantityBox";
 import { Button } from "@mui/material";
 import { Mycontext } from "../../App";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
+
 
 const Cart = () => {
   const [cartItems, setcartItems] = useState([]);
   const context = useContext(Mycontext);
+  const history = useNavigate();
 
   useEffect(() => {
-    getCartData("http://localhost:5000/cartItems");
+    if(context.isLogin === "true" ){
+      getCartData("http://localhost:5000/cartItems");
+
+    }else{
+      history('/')
+    }
   }, []);
 
   const getCartData = async (url) => {

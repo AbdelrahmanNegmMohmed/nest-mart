@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import "./Header.css";
 import logo from "../../Assest/Images/logo (1).svg";
 import SearchIcon from "@mui/icons-material/Search";
@@ -18,10 +18,17 @@ import PinDropIcon from "@mui/icons-material/PinDrop";
 import { ClickAwayListener } from "@mui/base/ClickAwayListener";
 import Nav from "./Nav/Nav";
 import { Link } from "react-router-dom";
+import { Mycontext } from "../../App";
+import { useNavigate } from 'react-router-dom';
+
+
 
 const Header = (props) => {
+  
   const [isDropdowen, setisOpenDropDowen] = useState(false);
   const headerRef = useRef();
+  const context = useContext(Mycontext);
+  const history = useNavigate()
 
   const [categories, setcategories] = useState([
     "Milks and Dairies",
@@ -69,6 +76,10 @@ const Header = (props) => {
       }
     });
   }, []);
+  const signOut=()=>{
+    context.signOut();
+    history('/')
+  }
 
   return (
     <>
@@ -140,14 +151,9 @@ const Header = (props) => {
                           </Link>
                         </span>
                       </li>
-                      <li className="list-inline-item">
-                        <Link to={"/signin"}>
-                              <Button className="btn btn-g ">Sign in</Button>
-                        </Link>
-                        </li>
-
-
-                      {/* <li className="list-inline-item">
+                      {
+                        context.isLogin==="true" ?
+                        <li className="list-inline-item">
                         <span onClick={() => setisOpenDropDowen(!isDropdowen)}>
                           <img src={icon_user} alt="" />
                           Account
@@ -178,13 +184,23 @@ const Header = (props) => {
                               </Button>
                             </li>
                             <li>
-                              <Button>
+                              <Button onClick={signOut}>
                                 <LogoutOutlinedIcon /> Sign Out
                               </Button>
                             </li>
                           </ul>
                         )}
-                      </li> */}
+                      </li>
+                      :
+                      <li className="list-inline-item">
+                        <Link to={"/signIn"}>
+                          <Button className="btn btn-g ">Sign in</Button>
+                        </Link>
+                      </li>
+                      
+                      }
+
+                      
                     </ul>
                   </ClickAwayListener>
                 </div>

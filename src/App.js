@@ -12,14 +12,22 @@ import axios from "axios";
 import Cart from "./Pages/Cart/Cart";
 import SignUp from "./Pages/signIUp/SignUp";
 import Signin from "./Pages/signIn/SignUp";
+
 const Mycontext =createContext();
 
 function App() {
   const [productData, setproductData] = useState([]);
   const [cartItems,setcartItems] = useState([])
+  const [isLogin,setisLogin]=useState();
+
+  useEffect(()=>{
+
+  },[isLogin])
+
   useEffect(() => {
     getData("http://localhost:5000/productData");
-
+    const is_login = localStorage.getItem('isLogin')
+    setisLogin(is_login)
   }, []);
  
 
@@ -55,10 +63,24 @@ function App() {
 
     }
   }
+  const signIn = ()=>{
+    const is_login = localStorage.getItem('isLogin')
+    setisLogin(is_login)
+
+  }
+  const signOut=()=>{
+    localStorage.removeItem('isLogin');
+    setisLogin(false)
+
+  }
+
 
  const value ={
+  isLogin,
   addToCart,
   cartItems,
+  signOut,
+  signIn,
   /* removeItemFromCart */
 
 }
