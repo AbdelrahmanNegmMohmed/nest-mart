@@ -6,9 +6,51 @@ import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
 import { Button } from "@mui/material";
 import GoogleImg from "../../Assest/Images/google.png";
+import { getAuth, signInWithEmailAndPassword} from "firebase/auth";
+import { app } from "../../firebase";
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
+
+const auth = getAuth(app);
 
 const Signin = () => {
   const [showPasswprd, setshowPasswprd] = useState(false);
+  const [showLoader, setShowLoader] = useState(false);
+
+  const [formFields, setFormFields] = useState({
+    email:"",
+    password:"",
+  });
+  const onChangeFirld = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setFormFields(() => ({
+      ...formFields,
+      [name]: value,
+    }));
+    console.log(formFields);
+  };
+
+
+  const signIn = () => {
+    setShowLoader(true);
+    signInWithEmailAndPassword(auth, formFields.email, formFields.password)
+    .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        setShowLoader(false);
+        setFormFields({
+          email:"",
+          password:"",
+        });
+ 
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
+  };
+
   return (
     <>
       <section className="signIn mb-5">
@@ -25,26 +67,37 @@ const Signin = () => {
 
         <div className="loginWrapper">
           <div className="card shadow">
+            <Backdrop
+              sx={{ color: "#000", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+              open={showLoader}
+              className="formLoader"
+            >
+              <CircularProgress color="inherit" />
+            </Backdrop>
             <h3>Sign In</h3>
             <form className="mt-4">
               <div className="form-group mb-4 w-100">
-                <TextField
+              <TextField
                   id="email"
                   type="email"
                   name="email"
                   label="Email"
                   className="w-100"
-                />
+                  onChange={onChangeFirld}
+                  value={formFields.email}
+                 />
               </div>
               <div className="form-group mb-4 w-100 ">
                 <div className="position-relative">
                   <TextField
-                    id="Password"
+                    id="password"
                     type={showPasswprd === false ? "password" : "text"}
-                    name="Password"
+                    name="password"
                     label="Password"
                     className="w-100"
-                  />
+                    onChange={onChangeFirld}
+                    value={formFields.password}
+                 />
                   <Button
                     className="icon"
                     onClick={() => setshowPasswprd(!showPasswprd)}
@@ -59,8 +112,11 @@ const Signin = () => {
               </div>
 
               <div className="form-group mt-5 mb-4 w-100">
-                <Button className="btn btn-g btn-lg w-100">Sign In</Button>
+                <Button className="btn btn-g btn-lg w-100" onClick={signIn}>
+                  Sign In
+                </Button>
               </div>
+
               <div className="form-group mt-5 mb-4 w-100 signInOr">
                 <p className="text-center">OR</p>
                 <Button className="w-100" variant="outlined">
@@ -68,6 +124,7 @@ const Signin = () => {
                   Sign In With Google
                 </Button>
               </div>
+
               <p className="text-center">
                 Not have an account
                 <b>
