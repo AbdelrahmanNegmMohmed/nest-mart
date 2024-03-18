@@ -6,7 +6,7 @@ import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
 import { Button } from "@mui/material";
 import GoogleImg from "../../Assest/Images/google.png";
-import { getAuth, signInWithEmailAndPassword} from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword,GoogleAuthProvider,signInWithPopup } from "firebase/auth";
 import { app } from "../../firebase";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -17,6 +17,7 @@ import { Mycontext } from "../../App";
 
 
 const auth = getAuth(app);
+const  googleProvider = new GoogleAuthProvider();
 
 const Signin = () => {
   const [showPasswprd, setshowPasswprd] = useState(false);
@@ -61,6 +62,30 @@ const Signin = () => {
         const errorMessage = error.message;
       });
   };
+
+
+  const signInWithGoogle =() =>{
+    signInWithPopup(auth, googleProvider)
+  .then((result) => {
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential.accessToken;
+    // The signed-in user info.
+    const user = result.user;
+    // IdP data available using getAdditionalUserInfo(result)
+    // ...
+  }).catch((error) => {
+    // Handle Errors here.
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // The email of the user's account used.
+    const email = error.customData.email;
+    // The AuthCredential type that was used.
+    const credential = GoogleAuthProvider.credentialFromError(error);
+    // ...
+  });
+
+  }
   return (
     <>
       <section className="signIn mb-5">
@@ -129,7 +154,7 @@ const Signin = () => {
 
               <div className="form-group mt-5 mb-4 w-100 signInOr">
                 <p className="text-center">OR</p>
-                <Button className="w-100" variant="outlined">
+                <Button className="w-100" variant="outlined" onClick={signInWithGoogle}>
                   <img src={GoogleImg} />
                   Sign In With Google
                 </Button>
